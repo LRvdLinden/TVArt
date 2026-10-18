@@ -4,9 +4,9 @@
 
 Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple TV die meesterwerken uit openbare museumcollecties schermvullend als tentoonstelling toont.
 
-**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `3` · **tvOS** 17.0+
+**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `4` · **tvOS** 17.0+
 
-📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build3.zip`](releases/TVArt-v1.0.0-build3.zip)
+📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build4.zip`](releases/TVArt-v1.0.0-build4.zip)
 
 ![Splashscreen](docs/splash.jpg)
 
@@ -37,7 +37,7 @@ Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple 
 |---|---|
 | ![Lagen](docs/icon-layers.png) | ![Top Shelf](docs/top-shelf.jpg) |
 
-Het schilderij in icoon, splash en Top Shelf is een eigen, procedureel gegenereerd impasto-landschap (geen bestaand kunstwerk). De bronscripts staan in [`BrandingSource/`](BrandingSource) — draai `brand.py` en daarna `export_assets.py` om alles opnieuw te genereren. Lettertype: Cormorant Garamond (SIL Open Font License, zie `TVArt/Fonts/OFL.txt`).
+Het app-icoon is het volledige schilderij in 3 parallax-lagen (lucht & zon · heuvels · korenveld). Het schilderij in icoon, splash en Top Shelf is een eigen, procedureel gegenereerd impasto-landschap (geen bestaand kunstwerk). De bronscripts staan in [`BrandingSource/`](BrandingSource) — draai `brand.py` en `icon_full_painting.py`, daarna `export_assets.py` om alles opnieuw te genereren. Lettertype: Cormorant Garamond (SIL Open Font License, zie `TVArt/Fonts/OFL.txt`).
 
 ## Openen in Xcode
 

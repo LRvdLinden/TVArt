@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0 (build 4) — 2026-10-18
+
+- App-icoon is nu het volledige schilderij, zonder lijst. De parallax-lagen zijn lucht met zon, heuvels en korenveld, zodat het landschap diepte krijgt als je het icoon selecteert. Het App Store-icoon en het icoon in Instellingen zijn mee aangepast.
+
 ## 1.0.0 (build 3) — 2026-10-18
 
 **Opgelost**
