@@ -28,6 +28,7 @@ struct SlideshowView: View {
     @State private var toast: String?
     @State private var toastToken = 0
     @State private var settingsOpen = false
+    @State private var suppressNextTap = false
     @State private var target = 0          // position we are heading to (rapid presses add up)
     @State private var loadGeneration = 0  // only the newest load may update the screen
 
@@ -79,8 +80,15 @@ struct SlideshowView: View {
             UIApplication.shared.isIdleTimerDisabled = true
         }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
-        .onLongPressGesture(minimumDuration: 0.8) { settingsOpen = true }
-        .onTapGesture { revealLabel(toggle: true) }
+        .onLongPressGesture(minimumDuration: 0.8) {
+            suppressNextTap = true
+            settingsOpen = true
+        }
+        .onTapGesture {
+            // Releasing a long press can also deliver a tap on some tvOS versions; ignore that one.
+            if suppressNextTap { suppressNextTap = false; return }
+            revealLabel(toggle: true)
+        }
         .onPlayPauseCommand { togglePause() }
         .onMoveCommand { direction in
             switch direction {
@@ -94,7 +102,7 @@ struct SlideshowView: View {
         .onExitCommand {
             if showLabel { withAnimation(.easeInOut(duration: 0.4)) { showLabel = false } } else { dismiss() }
         }
-        .fullScreenCover(isPresented: $settingsOpen, onDismiss: { focused = true }) { SettingsView() }
+        .fullScreenCover(isPresented: $settingsOpen, onDismiss: { focused = true; suppressNextTap = false }) { SettingsView() }
         .task { await start() }
         // Auto-advance timer; restarts whenever the slide, pause state or duration changes.
         .task(id: "\(position)-\(slide?.id.uuidString ?? "")-\(paused)-\(settings.duration)-\(settingsOpen)") {
