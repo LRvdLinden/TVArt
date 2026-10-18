@@ -15,7 +15,9 @@ struct TVArtApp: App {
 
 /// Shows the animated splash first, then fades into the museum home.
 struct RootView: View {
+    @EnvironmentObject var settings: GallerySettings
     @State private var showSplash = true
+    @State private var autoScreensaver = false
 
     var body: some View {
         ZStack {
@@ -34,7 +36,24 @@ struct RootView: View {
                 .zIndex(1)
             }
         }
-        // Warm up the artist covers while the splash plays.
+        // Warm up all collections in the background (disk-cached for a week).
         .task { await MuseumService.shared.prefetchCovers(for: Artist.collection) }
+        // Start the chosen screensaver after the set time without remote input.
+        .task {
+            try? await Task.sleep(for: .seconds(2))
+            ActivityMonitor.shared.install()
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(10))
+                let monitor = ActivityMonitor.shared
+                monitor.install()
+                guard settings.screensaverDelay > 0, !showSplash, !autoScreensaver,
+                      !monitor.exhibitionActive,
+                      monitor.idleSeconds >= Double(settings.screensaverDelay * 60) else { continue }
+                autoScreensaver = true
+            }
+        }
+        .fullScreenCover(isPresented: $autoScreensaver) {
+            ScreensaverView(theme: settings.screensaverTheme)
+        }
     }
 }

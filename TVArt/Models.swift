@@ -56,6 +56,64 @@ struct Artist: Identifiable, Hashable {
     ]
 }
 
+extension Artist {
+    /// Wikidata items of the painters (P170 creator) — the main source, via Wikimedia Commons images.
+    static let wikidata: [String: [String]] = [
+        "vangogh": ["Q5582"], "rembrandt": ["Q5598"], "monet": ["Q296"], "vermeer": ["Q41264"],
+        "renaissance": ["Q762", "Q5597", "Q47551", "Q5669"], "hals": ["Q167654"], "mondrian": ["Q151803"],
+        "gauguin": ["Q37693"], "manet": ["Q40599"], "munch": ["Q41406"], "goya": ["Q5432"], "cezanne": ["Q35548"],
+        "renoir": ["Q39931"], "degas": ["Q46373"], "turner": ["Q159758"], "hokusai": ["Q5586"],
+        "botticelli": ["Q5669"], "klimt": ["Q34661"]
+    ]
+    var wikidataIDs: [String] { Artist.wikidata[id] ?? [] }
+}
+
+/// Themed screensavers built from all masters (genre data from Wikidata P136).
+enum ScreensaverTheme: Int, CaseIterable, Identifiable {
+    case allMasters = 0, favorites, landscapes, portraits, stillLifes, cityscapes, sea, everydayLife
+
+    var id: Int { rawValue }
+
+    var title: String {
+        switch self {
+        case .allMasters: return String(localized: "All masters")
+        case .favorites: return String(localized: "My favorites")
+        case .landscapes: return String(localized: "Landscapes")
+        case .portraits: return String(localized: "Portraits")
+        case .stillLifes: return String(localized: "Still lifes & flowers")
+        case .cityscapes: return String(localized: "Cities & architecture")
+        case .sea: return String(localized: "Sea & water")
+        case .everydayLife: return String(localized: "Everyday life")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .allMasters: return "sparkles.rectangle.stack"
+        case .favorites: return "heart.fill"
+        case .landscapes: return "mountain.2"
+        case .portraits: return "person.crop.square"
+        case .stillLifes: return "camera.macro"
+        case .cityscapes: return "building.2"
+        case .sea: return "water.waves"
+        case .everydayLife: return "figure.walk"
+        }
+    }
+
+    /// Wikidata genre items that belong to this theme (nil = no genre filter).
+    var genres: Set<String>? {
+        switch self {
+        case .allMasters, .favorites: return nil
+        case .landscapes: return ["Q191163", "Q107425"]
+        case .portraits: return ["Q134307", "Q192110", "Q1400853"]
+        case .stillLifes: return ["Q170571", "Q12303833"]
+        case .cityscapes: return ["Q1935974", "Q18353841"]
+        case .sea: return ["Q158607"]
+        case .everydayLife: return ["Q1047337", "Q214127"]
+        }
+    }
+}
+
 struct Artwork: Identifiable, Hashable, Codable {
     let id: String
     let title: String
@@ -66,6 +124,10 @@ struct Artwork: Identifiable, Hashable, Codable {
     let source: String
     let detailURL: URL?
     var isPainting: Bool? = nil
+    /// Wikidata genres (P136) — used for themed screensavers.
+    var genres: [String]? = nil
+    /// Number of Wikipedia articles about the work: a good measure of how famous it is.
+    var popularity: Int? = nil
 }
 
 enum FitMode: Int, CaseIterable, Identifiable {
@@ -94,19 +156,27 @@ enum FitMode: Int, CaseIterable, Identifiable {
     @Published var hints: Bool { didSet { store.set(hints, forKey: Keys.hints) } }
     @Published var captions: Bool { didSet { store.set(captions, forKey: Keys.captions) } }
     @Published var fitModeRaw: Int { didSet { store.set(fitModeRaw, forKey: Keys.fit) } }
+    /// Minutes of inactivity before the screensaver starts; 0 = off.
+    @Published var screensaverDelay: Int { didSet { store.set(screensaverDelay, forKey: Keys.saverDelay) } }
+    @Published var screensaverThemeRaw: Int { didSet { store.set(screensaverThemeRaw, forKey: Keys.saverTheme) } }
     @Published private(set) var favoriteArtworks: [Artwork] = []
 
     var fitMode: FitMode { FitMode(rawValue: fitModeRaw) ?? .automatic }
+    var screensaverTheme: ScreensaverTheme { ScreensaverTheme(rawValue: screensaverThemeRaw) ?? .allMasters }
+    static let screensaverDelays: [Int] = [0, 2, 5, 10, 15, 30]
+    private var observer: NSObjectProtocol?
     var favorites: Set<String> { Set(favoriteArtworks.map(\.id)) }
 
     private enum Keys {
         static let duration = "duration", clock = "clock", random = "random", zoom = "zoom"
         static let hints = "hints", captions = "captions", fit = "fitMode", favorites = "favoriteArtworks.v2"
+        static let saverDelay = "screensaverDelay", saverTheme = "screensaverTheme"
     }
 
     init() {
         store.register(defaults: [Keys.duration: 30, Keys.clock: false, Keys.random: true, Keys.zoom: true,
-                                  Keys.hints: true, Keys.captions: true, Keys.fit: 0])
+                                  Keys.hints: true, Keys.captions: true, Keys.fit: 0,
+                                  Keys.saverDelay: 5, Keys.saverTheme: 0])
         duration = store.integer(forKey: Keys.duration)
         clock = store.bool(forKey: Keys.clock)
         random = store.bool(forKey: Keys.random)
@@ -114,11 +184,40 @@ enum FitMode: Int, CaseIterable, Identifiable {
         hints = store.bool(forKey: Keys.hints)
         captions = store.bool(forKey: Keys.captions)
         fitModeRaw = store.integer(forKey: Keys.fit)
+        screensaverDelay = store.integer(forKey: Keys.saverDelay)
+        screensaverThemeRaw = store.integer(forKey: Keys.saverTheme)
         if let data = store.data(forKey: Keys.favorites),
            let saved = try? JSONDecoder().decode([Artwork].self, from: data) {
             // Drop favorites from the retired Chicago source (its images are no longer reachable).
             favoriteArtworks = saved.filter { !$0.id.hasPrefix("aic-") }
         }
+        // Values can also be changed in the Apple TV Settings app (Settings.bundle).
+        observer = NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification,
+                                                          object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in self?.reloadFromStore() }
+        }
+    }
+
+    private func reloadFromStore() {
+        if duration != store.integer(forKey: Keys.duration) { duration = store.integer(forKey: Keys.duration) }
+        if clock != store.bool(forKey: Keys.clock) { clock = store.bool(forKey: Keys.clock) }
+        if random != store.bool(forKey: Keys.random) { random = store.bool(forKey: Keys.random) }
+        if zoom != store.bool(forKey: Keys.zoom) { zoom = store.bool(forKey: Keys.zoom) }
+        if screensaverDelay != store.integer(forKey: Keys.saverDelay) { screensaverDelay = store.integer(forKey: Keys.saverDelay) }
+    }
+
+    static func delayLabel(_ minutes: Int) -> String {
+        minutes == 0 ? String(localized: "Never") : String(localized: "After \(minutes) minutes")
+    }
+
+    func cycleScreensaverDelay() {
+        let all = Self.screensaverDelays
+        let i = all.firstIndex(of: screensaverDelay) ?? 0
+        screensaverDelay = all[(i + 1) % all.count]
+    }
+
+    func cycleScreensaverTheme() {
+        screensaverThemeRaw = (screensaverThemeRaw + 1) % ScreensaverTheme.allCases.count
     }
 
     static func durationLabel(_ seconds: Int) -> String {

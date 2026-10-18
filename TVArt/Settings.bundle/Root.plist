@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Exhibition</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<integer>30</integer>
+			<key>Key</key>
+			<string>duration</string>
+			<key>Title</key>
+			<string>Time per artwork</string>
+			<key>Titles</key>
+			<array>
+				<string>20 seconds</string>
+				<string>30 seconds</string>
+				<string>1 minute</string>
+				<string>2 minutes</string>
+				<string>5 minutes</string>
+				<string>8 minutes</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<integer>20</integer>
+				<integer>30</integer>
+				<integer>60</integer>
+				<integer>120</integer>
+				<integer>300</integer>
+				<integer>480</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>random</string>
+			<key>Title</key>
+			<string>Shuffle</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>zoom</string>
+			<key>Title</key>
+			<string>Slow zoom</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>clock</string>
+			<key>Title</key>
+			<string>Floating clock</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Screensaver</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<integer>5</integer>
+			<key>Key</key>
+			<string>screensaverDelay</string>
+			<key>Title</key>
+			<string>Start automatically</string>
+			<key>Titles</key>
+			<array>
+				<string>Never</string>
+				<string>After 2 minutes</string>
+				<string>After 5 minutes</string>
+				<string>After 10 minutes</string>
+				<string>After 15 minutes</string>
+				<string>After 30 minutes</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<integer>0</integer>
+				<integer>2</integer>
+				<integer>5</integer>
+				<integer>10</integer>
+				<integer>15</integer>
+				<integer>30</integer>
+			</array>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>

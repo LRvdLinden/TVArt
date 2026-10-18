@@ -15,6 +15,14 @@ private struct MetObject: Decodable {
     let classification: String?
 }
 
+// MARK: - Wikidata (SPARQL) + Wikimedia Commons images
+
+private struct SPARQLResponse: Decodable {
+    struct Value: Decodable { let value: String }
+    struct Results: Decodable { let bindings: [[String: Value]] }
+    let results: Results
+}
+
 // MARK: - Cleveland Museum of Art (Open Access API, CC0)
 
 private struct CMAResponse: Decodable {
@@ -59,13 +67,18 @@ actor MuseumService {
     private struct DiskEntry: Codable { let date: Date; let artworks: [Artwork] }
     private let diskDir: URL = {
         let base = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        let dir = base.appendingPathComponent("TVArtCollections", isDirectory: true)
+        let dir = base.appendingPathComponent("TVArtCollections.v2", isDirectory: true)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         return dir
     }()
 
+    /// Titles come in the device language, so the cache is per language.
+    private static var language: String {
+        (Locale.preferredLanguages.first ?? "en").lowercased().hasPrefix("nl") ? "nl" : "en"
+    }
+
     private func readDisk(_ id: String) -> [Artwork]? {
-        guard let data = try? Data(contentsOf: diskDir.appendingPathComponent("\(id).json")),
+        guard let data = try? Data(contentsOf: diskDir.appendingPathComponent("\(id)-\(Self.language).json")),
               let entry = try? JSONDecoder().decode(DiskEntry.self, from: data),
               Date().timeIntervalSince(entry.date) < 7 * 24 * 3600, !entry.artworks.isEmpty else { return nil }
         return entry.artworks
@@ -73,7 +86,7 @@ actor MuseumService {
 
     private func writeDisk(_ id: String, _ artworks: [Artwork]) {
         guard let data = try? JSONEncoder().encode(DiskEntry(date: Date(), artworks: artworks)) else { return }
-        try? data.write(to: diskDir.appendingPathComponent("\(id).json"), options: .atomic)
+        try? data.write(to: diskDir.appendingPathComponent("\(id)-\(Self.language).json"), options: .atomic)
     }
 
     func load(_ artist: Artist) async -> [Artwork] {
@@ -91,27 +104,135 @@ actor MuseumService {
         return result
     }
 
-    /// A representative thumbnail for the home screen (one quick Cleveland request, Met as fallback).
+    /// The most famous work of the artist, used as the cover on the home screen.
     func cover(for artist: Artist) async -> URL? {
         if let url = covers[artist.id] { return url }
-        if cache[artist.id] == nil, let disk = readDisk(artist.id) { cache[artist.id] = disk }
-        if let first = cache[artist.id]?.first { covers[artist.id] = first.thumbnailURL; return first.thumbnailURL }
-        var found = await cleveland(name: artist.clevelandNames[0], keys: artist.keys, limit: 15)
-            .sorted { ($0.isPainting == true) && ($1.isPainting != true) }.first?.thumbnailURL
-        if found == nil {
-            found = await met(term: artist.metTerms[0], keys: artist.keys, maxObjects: 3).first?.thumbnailURL
-        }
+        let found = await load(artist).first?.thumbnailURL
         if let found { covers[artist.id] = found }
         return found
     }
 
+    /// Loads every collection once in the background (disk-cached for a week) so covers and
+    /// screensavers are ready. Wikidata queries are throttled by `wikidataSlot()`.
     func prefetchCovers(for artists: [Artist]) async {
-        await withTaskGroup(of: Void.self) { group in
-            for artist in artists.prefix(8) { group.addTask { _ = await self.cover(for: artist) } }
+        for artist in artists {
+            if Task.isCancelled { return }
+            _ = await cover(for: artist)
         }
     }
 
+    /// Mix of the best-known works of all masters, for screensavers.
+    func screensaverArtworks(theme: ScreensaverTheme, perArtist: Int = 120) async -> [Artwork] {
+        let artists = Artist.collection.filter { $0.id != "botticelli" }   // already inside Renaissance
+        let lists = await withTaskGroup(of: [Artwork].self) { group -> [[Artwork]] in
+            for artist in artists { group.addTask { await self.load(artist) } }
+            var all: [[Artwork]] = []
+            for await list in group { all.append(list) }
+            return all
+        }
+        return lists.flatMap { Self.filter($0, theme: theme).prefix(perArtist) }
+    }
+
+    /// Cover for a screensaver theme, using only collections that are already loaded (no network).
+    func themeCover(_ theme: ScreensaverTheme) -> URL? {
+        for artist in Artist.collection {
+            if cache[artist.id] == nil, let disk = readDisk(artist.id) { cache[artist.id] = disk }
+            if let hit = Self.filter(cache[artist.id] ?? [], theme: theme).first { return hit.thumbnailURL }
+        }
+        return nil
+    }
+
+    private static func filter(_ works: [Artwork], theme: ScreensaverTheme) -> [Artwork] {
+        guard let genres = theme.genres else { return works }
+        return works.filter { !Set($0.genres ?? []).isDisjoint(with: genres) }
+    }
+
+    // MARK: Wikidata throttle (max 2 queries at a time, as the query service asks)
+
+    private var wikidataRunning = 0
+    private var wikidataWaiters: [CheckedContinuation<Void, Never>] = []
+
+    private func wikidataSlot() async {
+        if wikidataRunning < 2 { wikidataRunning += 1; return }
+        await withCheckedContinuation { wikidataWaiters.append($0) }
+    }
+
+    private func releaseWikidataSlot() {
+        if wikidataWaiters.isEmpty { wikidataRunning -= 1 } else { wikidataWaiters.removeFirst().resume() }
+    }
+
     private func fetch(_ artist: Artist) async -> [Artwork] {
+        // 1. Wikidata + Wikimedia Commons: hundreds of works per master, ordered by fame.
+        let wiki = await wikidata(artist)
+        if wiki.count >= 12 { return wiki }
+        // 2. Fallback / supplement: The Met and the Cleveland Museum of Art.
+        let legacy = await museums(artist)
+        var seen = Set(wiki.map(\.id))
+        return wiki + legacy.filter { seen.insert($0.id).inserted }
+    }
+
+    private func wikidata(_ artist: Artist) async -> [Artwork] {
+        let creators = artist.wikidataIDs.map { "wd:\($0)" }.joined(separator: " ")
+        guard !creators.isEmpty else { return [] }
+        let lang = Self.language == "nl" ? "nl,en" : "en,nl"
+        let query = """
+        SELECT ?item ?itemLabel ?image ?year ?creatorLabel ?collectionLabel ?links ?genre WHERE {
+          VALUES ?creator { \(creators) }
+          VALUES ?type { wd:Q3305213 wd:Q18218093 }
+          ?item wdt:P170 ?creator; wdt:P31 ?type; wdt:P18 ?image; wikibase:sitelinks ?links.
+          OPTIONAL { ?item wdt:P571 ?inception. BIND(YEAR(?inception) AS ?year) }
+          OPTIONAL { ?item wdt:P195 ?collection }
+          OPTIONAL { ?item wdt:P136 ?genre }
+          SERVICE wikibase:label { bd:serviceParam wikibase:language "\(lang)". }
+        } ORDER BY DESC(?links) LIMIT 2500
+        """
+        guard let encoded = query.addingPercentEncoding(withAllowedCharacters: .alphanumerics),
+              let url = URL(string: "https://query.wikidata.org/sparql?format=json&query=\(encoded)") else { return [] }
+        var request = URLRequest(url: url, timeoutInterval: 45)
+        request.setValue("application/sparql-results+json", forHTTPHeaderField: "Accept")
+        request.setValue(Self.userAgent, forHTTPHeaderField: "User-Agent")
+
+        await wikidataSlot()
+        let result = try? await session.data(for: request)
+        releaseWikidataSlot()
+        guard let (data, response) = result,
+              (response as? HTTPURLResponse)?.statusCode == 200,
+              let payload = try? JSONDecoder().decode(SPARQLResponse.self, from: data) else { return [] }
+
+        // Rows repeat per collection/genre: merge them per item, keeping the fame order.
+        var order: [String] = []
+        var items: [String: Artwork] = [:]
+        var genres: [String: Set<String>] = [:]
+        for row in payload.results.bindings {
+            guard let itemURI = row["item"]?.value, let qid = itemURI.split(separator: "/").last.map(String.init) else { continue }
+            if let genre = row["genre"]?.value.split(separator: "/").last { genres[qid, default: []].insert(String(genre)) }
+            guard items[qid] == nil,
+                  let title = row["itemLabel"]?.value, title != qid,           // skip works without a label
+                  let file = row["image"]?.value else { continue }
+            let base = file.replacingOccurrences(of: "http://", with: "https://")
+            guard let full = URL(string: base + "?width=3840"), let thumb = URL(string: base + "?width=960") else { continue }
+            var place = row["collectionLabel"]?.value ?? ""
+            if place.hasPrefix("http") || place.hasPrefix("Q") { place = "" }
+            items[qid] = Artwork(id: "wd-\(qid)", title: title,
+                                 artist: row["creatorLabel"]?.value ?? artist.name,
+                                 date: row["year"]?.value ?? "",
+                                 imageURL: full, thumbnailURL: thumb,
+                                 source: place.isEmpty ? "Wikimedia Commons" : place,
+                                 detailURL: URL(string: "https://www.wikidata.org/wiki/\(qid)"),
+                                 isPainting: true,
+                                 popularity: Int(row["links"]?.value ?? ""))
+            order.append(qid)
+        }
+        return order.compactMap { qid in
+            guard var art = items[qid] else { return nil }
+            art.genres = genres[qid].map { Array($0) }
+            return art
+        }
+    }
+
+    static let userAgent = "TVArt/1.0 (https://github.com/LRvdLinden/TVArt) tvOS"
+
+    private func museums(_ artist: Artist) async -> [Artwork] {
         let perTerm = max(8, 32 / max(1, artist.metTerms.count))
         let combined = await withTaskGroup(of: [Artwork].self) { group -> [Artwork] in
             // Met terms run one after another (inside a single task) to stay well below its rate limits.

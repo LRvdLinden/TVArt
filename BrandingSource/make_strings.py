@@ -63,12 +63,35 @@ plain = {
     "%lld / %lld": "%lld / %lld",
     "%@, %@": "%@, %@",
     "TVArt": "TVArt",
+    "All masters": "Alle meesters",
+    "Landscapes": "Landschappen",
+    "Portraits": "Portretten",
+    "Still lifes & flowers": "Stillevens & bloemen",
+    "Cities & architecture": "Stad & architectuur",
+    "Sea & water": "Zee & water",
+    "Everyday life": "Dagelijks leven",
+    "Never": "Nooit",
+    "Screensavers": "Screensavers",
+    "Screensaver": "Screensaver",
+    "Start automatically": "Automatisch starten",
+    "Theme": "Thema",
+    "While TVArt shows art, the Apple TV screensaver stays off, so artworks can stay on screen for hours.":
+        "Zolang TVArt kunst toont, blijft de screensaver van de Apple TV uit. Zo kunnen kunstwerken urenlang in beeld blijven.",
+    "Collecting masterpieces from all masters. The first time takes a moment.":
+        "Meesterwerken van alle meesters verzamelen. De eerste keer duurt dit even.",
+    "No artworks found for this screensaver yet.": "Nog geen kunstwerken gevonden voor deze screensaver.",
+    "Press Menu to close.": "Druk op Menu om te sluiten.",
+    "Artworks and titles come from Wikidata and Wikimedia Commons, supplemented by the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Only public-domain works are shown. These settings are also available in the Apple TV Settings app.":
+        "Kunstwerken en titels komen van Wikidata en Wikimedia Commons, aangevuld met de open collecties van The Metropolitan Museum of Art en het Cleveland Museum of Art. Alleen werken uit het publieke domein worden getoond. Deze instellingen staan ook in de Instellingen-app van de Apple TV.",
+    "Artworks come from Wikidata and Wikimedia Commons, The Metropolitan Museum of Art and the Cleveland Museum of Art. Internet connection required.":
+        "Kunstwerken komen van Wikidata en Wikimedia Commons, The Metropolitan Museum of Art en het Cleveland Museum of Art. Internetverbinding vereist.",
 }
 plurals = {
     "%lld seconds": (("%lld second", "%lld seconds"), ("%lld seconde", "%lld seconden")),
     "%lld minutes": (("%lld minute", "%lld minutes"), ("%lld minuut", "%lld minuten")),
     "%lld artworks": (("%lld artwork", "%lld artworks"), ("%lld kunstwerk", "%lld kunstwerken")),
     "%lld works": (("%lld work", "%lld works"), ("%lld werk", "%lld werken")),
+    "After %lld minutes": (("After %lld minute", "After %lld minutes"), ("Na %lld minuut", "Na %lld minuten")),
 }
 
 def unit(v):

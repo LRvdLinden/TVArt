@@ -9,7 +9,8 @@ def oid(name):
     return hashlib.md5(name.encode()).hexdigest()[:24].upper()
 
 swift = ["TVArtApp.swift", "Theme.swift", "SplashView.swift", "Models.swift", "MuseumService.swift",
-         "ImagePipeline.swift", "HomeView.swift", "GalleryView.swift", "SlideshowView.swift", "SettingsView.swift"]
+         "ImagePipeline.swift", "HomeView.swift", "GalleryView.swift", "SlideshowView.swift", "SettingsView.swift",
+         "ActivityMonitor.swift", "ScreensaverView.swift"]
 fonts = ["CormorantGaramond-SemiBold.ttf", "CormorantGaramond-Medium.ttf"]
 for f in swift: assert os.path.exists(f"{ROOT}/TVArt/{f}"), f
 for f in fonts: assert os.path.exists(f"{ROOT}/TVArt/Fonts/{f}"), f
@@ -25,10 +26,11 @@ for f in fonts:
 files["Assets.xcassets"] = (oid("refassets"), "{isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = \"<group>\"; }")
 files["Info.plist"] = (oid("refinfo"), "{isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = \"<group>\"; }")
 files["Localizable.xcstrings"] = (oid("refstrings"), "{isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = \"<group>\"; }")
+files["Settings.bundle"] = (oid("refsettingsbundle"), "{isa = PBXFileReference; lastKnownFileType = \"wrapper.plug-in\"; path = Settings.bundle; sourceTree = \"<group>\"; }")
 files["OFL.txt"] = (oid("refofl"), "{isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = \"<group>\"; }")
 APP = oid("refapp")
 
-build = {f: oid("build" + f) for f in swift + fonts + ["Assets.xcassets", "Localizable.xcstrings"]}
+build = {f: oid("build" + f) for f in swift + fonts + ["Assets.xcassets", "Localizable.xcstrings", "Settings.bundle"]}
 
 G_MAIN, G_APP, G_FONTS, G_PROD = oid("gmain"), oid("gapp"), oid("gfonts"), oid("gprod")
 P_SRC, P_RES, P_FW = oid("psrc"), oid("pres"), oid("pfw")
@@ -54,7 +56,7 @@ def group(gid, name, children, path=None):
     n = f"\t\t\tname = {name};\n" if name and not path else ""
     add(f"\t\t{gid} = {{\n\t\t\tisa = PBXGroup;\n\t\t\tchildren = (\n{ch}\t\t\t);\n{n}{p}\t\t\tsourceTree = \"<group>\";\n\t\t}};")
 group(G_MAIN, None, [G_APP, G_PROD])
-group(G_APP, "TVArt", [files[f][0] for f in swift] + [G_FONTS, files["Assets.xcassets"][0], files["Localizable.xcstrings"][0], files["Info.plist"][0]], path="TVArt")
+group(G_APP, "TVArt", [files[f][0] for f in swift] + [G_FONTS, files["Assets.xcassets"][0], files["Localizable.xcstrings"][0], files["Settings.bundle"][0], files["Info.plist"][0]], path="TVArt")
 group(G_FONTS, "Fonts", [files[f][0] for f in fonts] + [files["OFL.txt"][0]], path="Fonts")
 group(G_PROD, "Products", [APP])
 add("/* End PBXGroup section */\n\n/* Begin PBXNativeTarget section */")
@@ -106,7 +108,7 @@ add(f"""\t\t{PROJECT} /* Project object */ = {{
 \t\t\t);
 \t\t}};""")
 add("/* End PBXProject section */\n\n/* Begin PBXResourcesBuildPhase section */")
-res = "".join(f"\t\t\t\t{build[f]} /* {f} in Resources */,\n" for f in ["Assets.xcassets", "Localizable.xcstrings"] + fonts)
+res = "".join(f"\t\t\t\t{build[f]} /* {f} in Resources */,\n" for f in ["Assets.xcassets", "Localizable.xcstrings", "Settings.bundle"] + fonts)
 add(f"\t\t{P_RES} /* Resources */ = {{\n\t\t\tisa = PBXResourcesBuildPhase;\n\t\t\tbuildActionMask = 2147483647;\n\t\t\tfiles = (\n{res}\t\t\t);\n\t\t\trunOnlyForDeploymentPostprocessing = 0;\n\t\t}};")
 add("/* End PBXResourcesBuildPhase section */\n\n/* Begin PBXSourcesBuildPhase section */")
 src = "".join(f"\t\t\t\t{build[f]} /* {f} in Sources */,\n" for f in swift)

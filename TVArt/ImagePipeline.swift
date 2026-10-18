@@ -18,6 +18,8 @@ actor ImagePipeline {
         c.timeoutIntervalForRequest = 25
         c.requestCachePolicy = .returnCacheDataElseLoad
         c.urlCache = URLCache(memoryCapacity: 20_000_000, diskCapacity: 500_000_000)
+        // Wikimedia asks every client to identify itself.
+        c.httpAdditionalHeaders = ["User-Agent": MuseumService.userAgent]
         return URLSession(configuration: c)
     }()
 

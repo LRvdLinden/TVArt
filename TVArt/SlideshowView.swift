@@ -77,9 +77,15 @@ struct SlideshowView: View {
         .focusEffectDisabled()
         .onAppear {
             focused = true
+            // Keep the TV awake: the system screensaver stays off while art is on screen.
             UIApplication.shared.isIdleTimerDisabled = true
+            ActivityMonitor.shared.exhibitionActive = true
         }
-        .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
+        .onDisappear {
+            UIApplication.shared.isIdleTimerDisabled = false
+            ActivityMonitor.shared.exhibitionActive = false
+            ActivityMonitor.shared.poke()
+        }
         .onLongPressGesture(minimumDuration: 0.8) {
             suppressNextTap = true
             settingsOpen = true

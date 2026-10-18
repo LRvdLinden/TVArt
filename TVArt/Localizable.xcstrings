@@ -191,12 +191,72 @@
         }
       }
     },
+    "After %lld minutes": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "After %lld minute"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "After %lld minutes"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Na %lld minuut"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Na %lld minuten"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "All masters": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle meesters"
+          }
+        }
+      }
+    },
     "All works": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Alle werken"
+          }
+        }
+      }
+    },
+    "Artworks and titles come from Wikidata and Wikimedia Commons, supplemented by the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Only public-domain works are shown. These settings are also available in the Apple TV Settings app.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunstwerken en titels komen van Wikidata en Wikimedia Commons, aangevuld met de open collecties van The Metropolitan Museum of Art en het Cleveland Museum of Art. Alleen werken uit het publieke domein worden getoond. Deze instellingen staan ook in de Instellingen-app van de Apple TV."
           }
         }
       }
@@ -217,6 +277,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kunstwerken worden live geladen uit de open collecties van The Metropolitan Museum of Art en het Cleveland Museum of Art. Alleen werken die het museum als publiek domein markeert worden getoond."
+          }
+        }
+      }
+    },
+    "Artworks come from Wikidata and Wikimedia Commons, The Metropolitan Museum of Art and the Cleveland Museum of Art. Internet connection required.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunstwerken komen van Wikidata en Wikimedia Commons, The Metropolitan Museum of Art en het Cleveland Museum of Art. Internetverbinding vereist."
           }
         }
       }
@@ -251,12 +321,42 @@
         }
       }
     },
+    "Cities & architecture": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stad & architectuur"
+          }
+        }
+      }
+    },
+    "Collecting masterpieces from all masters. The first time takes a moment.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meesterwerken van alle meesters verzamelen. De eerste keer duurt dit even."
+          }
+        }
+      }
+    },
     "Display": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Weergave"
+          }
+        }
+      }
+    },
+    "Everyday life": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dagelijks leven"
           }
         }
       }
@@ -331,6 +431,16 @@
         }
       }
     },
+    "Landscapes": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Landschappen"
+          }
+        }
+      }
+    },
     "Masterpieces on your biggest screen": {
       "localizations": {
         "nl": {
@@ -357,6 +467,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mijn favorieten"
+          }
+        }
+      }
+    },
+    "Never": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nooit"
+          }
+        }
+      }
+    },
+    "No artworks found for this screensaver yet.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen kunstwerken gevonden voor deze screensaver."
           }
         }
       }
@@ -431,6 +561,26 @@
         }
       }
     },
+    "Portraits": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Portretten"
+          }
+        }
+      }
+    },
+    "Press Menu to close.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Druk op Menu om te sluiten."
+          }
+        }
+      }
+    },
     "Previous / next": {
       "localizations": {
         "nl": {
@@ -467,6 +617,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bewaard op deze Apple TV"
+          }
+        }
+      }
+    },
+    "Screensaver": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screensaver"
+          }
+        }
+      }
+    },
+    "Screensavers": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screensavers"
+          }
+        }
+      }
+    },
+    "Sea & water": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zee & water"
           }
         }
       }
@@ -541,12 +721,32 @@
         }
       }
     },
+    "Start automatically": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch starten"
+          }
+        }
+      }
+    },
     "Start exhibition": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Start tentoonstelling"
+          }
+        }
+      }
+    },
+    "Still lifes & flowers": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stillevens & bloemen"
           }
         }
       }
@@ -577,6 +777,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "De museumcollecties zijn nu niet bereikbaar, of er zijn geen rechtenvrije werken gevonden."
+          }
+        }
+      }
+    },
+    "Theme": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thema"
           }
         }
       }
@@ -627,6 +837,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Versie %@"
+          }
+        }
+      }
+    },
+    "While TVArt shows art, the Apple TV screensaver stays off, so artworks can stay on screen for hours.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zolang TVArt kunst toont, blijft de screensaver van de Apple TV uit. Zo kunnen kunstwerken urenlang in beeld blijven."
           }
         }
       }

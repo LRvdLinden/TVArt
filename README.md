@@ -4,9 +4,9 @@
 
 Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple TV die meesterwerken uit openbare museumcollecties schermvullend als tentoonstelling toont.
 
-**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `4` · **tvOS** 17.0+
+**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `5` · **tvOS** 17.0+
 
-📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build4.zip`](releases/TVArt-v1.0.0-build4.zip)
+📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build5.zip`](releases/TVArt-v1.0.0-build5.zip)
 
 ![Splashscreen](docs/splash.jpg)
 
@@ -14,6 +14,8 @@ Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple 
 
 - Kies een kunstenaar of collectie: Van Gogh, Rembrandt, Monet, Vermeer, Frans Hals, Mondriaan, Gauguin, Manet, Munch, Goya, Cézanne, Renoir, Degas, Turner, Hokusai, Botticelli, Klimt en de Renaissance.
 - Volledig Nederlands en Engels, volgt de taal van de Apple TV.
+- Honderden werken per meester via Wikidata/Wikimedia Commons (Van Gogh: 889), gesorteerd op bekendheid, met titels in je eigen taal.
+- **Screensavers** per thema (Alle meesters, Landschappen, Portretten, Stillevens & bloemen, Stad & architectuur, Zee & water, Dagelijks leven, Favorieten) die automatisch starten na een ingestelde tijd.
 - Tentoonstellingsmodus met vloeiende overgangen, langzame Ken Burns-zoom en een museumbordje per werk.
 - Tijd per werk: 20 / 30 seconden of 1 / 2 / 5 / 8 minuten; willekeurig of op volgorde.
 - Weergave Automatisch / Volledig werk / Beeldvullend, met vervaagde achtergrond bij staande werken.
@@ -58,7 +60,10 @@ TVArt/
   GalleryView.swift     Raster met werken per kunstenaar
   SlideshowView.swift   Tentoonstellingsmodus
   SettingsView.swift    Instellingen (tvOS Settings-stijl)
-  MuseumService.swift   The Met + Cleveland Museum of Art, schijfcache
+  MuseumService.swift   Wikidata/Commons + The Met + Cleveland, schijfcache
+  ScreensaverView.swift Screensavers per thema
+  ActivityMonitor.swift Detecteert inactiviteit voor automatische screensaver
+  Settings.bundle       Instellingen in de Apple TV-Instellingen-app
   ImagePipeline.swift   Laden, cachen, vooraf ophalen van beelden
   Assets.xcassets       App Icon & Top Shelf brand assets, SplashArt
   Localizable.xcstrings Nederlands + Engels
@@ -67,6 +72,7 @@ TVArt/
 
 ## Bronnen & rechten
 
+- Wikidata Query Service + Wikimedia Commons (hoofdbron, afbeeldingen van publiek-domeinwerken): https://query.wikidata.org/
 - The Metropolitan Museum of Art Collection API (v1.1 search): https://metmuseum.github.io/
 - Cleveland Museum of Art Open Access API (CC0): https://openaccess-api.clevelandart.org/
 - Collecties worden 7 dagen gecachet op het apparaat. Het Art Institute of Chicago is niet meer bruikbaar (beeldserver blokkeert apps).

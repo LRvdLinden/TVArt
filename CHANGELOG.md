@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.0 (build 5) — 2026-10-18
+
+**Veel meer kunstwerken**
+- Nieuwe hoofdbron: **Wikidata + Wikimedia Commons**. Van Gogh gaat van 43 naar **889 werken**, Monet naar ~1.260, Rembrandt ~730, Renoir ~2.000, Vermeer 36, en de Renaissance-collectie bevat nu ook de Mona Lisa en De geboorte van Venus.
+- Werken staan op **bekendheid**: De sterrennacht, De aardappeleters, Korenveld met kraaien, Irissen en Caféterras bij nacht komen eerst.
+- **Titels in je eigen taal** (Nederlands/Engels) en het museum waar het werk hangt op het museumbordje.
+- Beelden in 4K (3840 px) via Wikimedia; de app identificeert zich netjes met een eigen User-Agent.
+- The Met en het Cleveland Museum of Art blijven als aanvulling/terugvaloptie.
+- Alle collecties laden op de achtergrond en worden een week op de Apple TV bewaard (cache vernieuwd: v2).
+
+**Screensavers**
+- Nieuwe rij **Screensavers** op het startscherm: Alle meesters, Mijn favorieten, Landschappen, Portretten, Stillevens & bloemen, Stad & architectuur, Zee & water en Dagelijks leven (thema's op basis van Wikidata-genres).
+- **Automatisch starten** na 2, 5, 10, 15 of 30 minuten zonder bediening (standaard 5 minuten), met een eigen thema. Elke druk of veeg op de Siri Remote telt als activiteit.
+- Zolang er kunst in beeld is blijft de Apple TV-screensaver uit, zodat werken urenlang kunnen blijven staan (zoals bij de Van Gogh-app).
+- Instellingen ook in de **Apple TV-Instellingen-app** (Instellingen › Apps › TVArt): tijd per werk, willekeurig, zoom, klok en screensaver-start.
+
 ## 1.0.0 (build 4) — 2026-10-18
 
 - App-icoon is nu het volledige schilderij, zonder lijst. De parallax-lagen zijn lucht met zon, heuvels en korenveld, zodat het landschap diepte krijgt als je het icoon selecteert. Het App Store-icoon en het icoon in Instellingen zijn mee aangepast.

@@ -17,10 +17,13 @@
 		34CDA6ABB828E5A3F4626E5A /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D25137B154A07BED402469 /* GalleryView.swift */; };
 		1A6493B31D0356868DD34C6B /* SlideshowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037FDF29C521984CC1382BED /* SlideshowView.swift */; };
 		C24299D89D285E985C089C0F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344231C687A1F4BDC84AE838 /* SettingsView.swift */; };
+		CB8DE7511053B752CAD9458A /* ActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7A9085D2FD9DB9A8C0BB9 /* ActivityMonitor.swift */; };
+		5D49AC0E7A39CC9B6619CD8A /* ScreensaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE0DA14E9A9E34DB2A8B5A /* ScreensaverView.swift */; };
 		918300860A3D632F0686AE00 /* CormorantGaramond-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F419C7C87076A98111972 /* CormorantGaramond-SemiBold.ttf */; };
 		E2B22BA1BD7EEBA609B2F9CC /* CormorantGaramond-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A753DC3125B92E1CE374F /* CormorantGaramond-Medium.ttf */; };
 		73EC906678F06B0611143396 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58B2FC89C30513E5D34080C /* Assets.xcassets */; };
 		3A1284E7A64E5C2D137F8885 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 46E72EBC9729E5FAE1C0B052 /* Localizable.xcstrings */; };
+		DC3E8847F2B6BE1B5237FEC8 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52DBAE9027459D16E5C9FCA8 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +38,14 @@
 		69D25137B154A07BED402469 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		037FDF29C521984CC1382BED /* SlideshowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideshowView.swift; sourceTree = "<group>"; };
 		344231C687A1F4BDC84AE838 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D1A7A9085D2FD9DB9A8C0BB9 /* ActivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMonitor.swift; sourceTree = "<group>"; };
+		1FDE0DA14E9A9E34DB2A8B5A /* ScreensaverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverView.swift; sourceTree = "<group>"; };
 		7C7F419C7C87076A98111972 /* CormorantGaramond-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CormorantGaramond-SemiBold.ttf; sourceTree = "<group>"; };
 		2D9A753DC3125B92E1CE374F /* CormorantGaramond-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CormorantGaramond-Medium.ttf; sourceTree = "<group>"; };
 		B58B2FC89C30513E5D34080C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		102DE2A2AE766BE3209864BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46E72EBC9729E5FAE1C0B052 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		52DBAE9027459D16E5C9FCA8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E9A1B0878F3B471C62CCC20A /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,9 +81,12 @@
 				69D25137B154A07BED402469,
 				037FDF29C521984CC1382BED,
 				344231C687A1F4BDC84AE838,
+				D1A7A9085D2FD9DB9A8C0BB9,
+				1FDE0DA14E9A9E34DB2A8B5A,
 				735B00F8AD7F523C452E3D39,
 				B58B2FC89C30513E5D34080C,
 				46E72EBC9729E5FAE1C0B052,
+				52DBAE9027459D16E5C9FCA8,
 				102DE2A2AE766BE3209864BC,
 			);
 			path = TVArt;
@@ -162,6 +171,7 @@
 			files = (
 				73EC906678F06B0611143396 /* Assets.xcassets in Resources */,
 				3A1284E7A64E5C2D137F8885 /* Localizable.xcstrings in Resources */,
+				DC3E8847F2B6BE1B5237FEC8 /* Settings.bundle in Resources */,
 				918300860A3D632F0686AE00 /* CormorantGaramond-SemiBold.ttf in Resources */,
 				E2B22BA1BD7EEBA609B2F9CC /* CormorantGaramond-Medium.ttf in Resources */,
 			);
@@ -184,6 +194,8 @@
 				34CDA6ABB828E5A3F4626E5A /* GalleryView.swift in Sources */,
 				1A6493B31D0356868DD34C6B /* SlideshowView.swift in Sources */,
 				C24299D89D285E985C089C0F /* SettingsView.swift in Sources */,
+				CB8DE7511053B752CAD9458A /* ActivityMonitor.swift in Sources */,
+				5D49AC0E7A39CC9B6619CD8A /* ScreensaverView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +248,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = EU3UY476T6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -262,7 +274,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = EU3UY476T6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;

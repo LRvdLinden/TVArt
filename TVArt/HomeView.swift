@@ -3,6 +3,7 @@ import SwiftUI
 struct ArtistHomeView: View {
     @EnvironmentObject var settings: GallerySettings
     @State private var showingSettings = false
+    @State private var screensaver: ScreensaverTheme?
     private let columns = [GridItem(.adaptive(minimum: 400), spacing: 44)]
 
     var body: some View {
@@ -11,6 +12,19 @@ struct ArtistHomeView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     hero
                     VStack(alignment: .leading, spacing: 36) {
+                        sectionTitle("Screensavers")
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(spacing: 44) {
+                                ForEach(ScreensaverTheme.allCases.filter { $0 != .favorites || !settings.favoriteArtworks.isEmpty }) { theme in
+                                    Button { screensaver = theme } label: { ScreensaverCard(theme: theme) }
+                                        .buttonStyle(.card)
+                                }
+                            }
+                            .padding(.vertical, 30)
+                        }
+                        .padding(.horizontal, -80)
+                        .contentMargins(.horizontal, 80, for: .scrollContent)
+
                         if !settings.favoriteArtworks.isEmpty {
                             sectionTitle("My favorites")
                             NavigationLink {
@@ -27,7 +41,7 @@ struct ArtistHomeView: View {
                                     .buttonStyle(.card)
                             }
                         }
-                        Text("Artworks are loaded live from the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Internet connection required.")
+                        Text("Artworks come from Wikidata and Wikimedia Commons, The Metropolitan Museum of Art and the Cleveland Museum of Art. Internet connection required.")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                             .padding(.top, 20)
@@ -41,6 +55,7 @@ struct ArtistHomeView: View {
                 ArtworkCollectionView(title: artist.name, subtitle: artist.years, artist: artist)
             }
             .fullScreenCover(isPresented: $showingSettings) { SettingsView() }
+            .fullScreenCover(item: $screensaver) { theme in ScreensaverView(theme: theme) }
         }
         .tint(Theme.goldSolid)
     }

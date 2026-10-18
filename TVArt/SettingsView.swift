@@ -52,6 +52,16 @@ struct SettingsView: View {
                         SettingsToggleRow(title: "Floating clock", isOn: $settings.clock)
                         SettingsToggleRow(title: "Show remote tips", isOn: $settings.hints)
 
+                        SettingsHeader("Screensaver")
+                        SettingsRow(title: "Start automatically", value: GallerySettings.delayLabel(settings.screensaverDelay)) {
+                            settings.cycleScreensaverDelay()
+                        }
+                        SettingsRow(title: "Theme", value: settings.screensaverTheme.title) { settings.cycleScreensaverTheme() }
+                        Text("While TVArt shows art, the Apple TV screensaver stays off, so artworks can stay on screen for hours.")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal, 24)
+
                         SettingsHeader("Siri Remote")
                         SettingsInfoRow(title: "◀ ▶", value: String(localized: "Previous / next"))
                         SettingsInfoRow(title: "▲", value: String(localized: "Favorite on/off"))
@@ -60,7 +70,7 @@ struct SettingsView: View {
                         SettingsInfoRow(title: "Hold click", value: String(localized: "Settings"))
 
                         SettingsHeader("About TVArt")
-                        Text("Artworks are loaded live from the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Only works marked public domain by the museum are shown.")
+                        Text("Artworks and titles come from Wikidata and Wikimedia Commons, supplemented by the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Only public-domain works are shown. These settings are also available in the Apple TV Settings app.")
                             .font(.callout)
                             .foregroundStyle(.secondary)
                             .padding(.horizontal, 24)
