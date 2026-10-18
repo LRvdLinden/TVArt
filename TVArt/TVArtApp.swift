@@ -52,8 +52,16 @@ struct RootView: View {
                 autoScreensaver = true
             }
         }
-        .fullScreenCover(isPresented: $autoScreensaver) {
+        .fullScreenCover(isPresented: $autoScreensaver, onDismiss: { ActivityMonitor.shared.poke() }) {
             ScreensaverView(theme: settings.screensaverTheme)
+        }
+        // If the cover could not appear (another full-screen view was open), try again later.
+        .onChange(of: autoScreensaver) { _, isOn in
+            guard isOn else { return }
+            Task {
+                try? await Task.sleep(for: .seconds(3))
+                if !ActivityMonitor.shared.exhibitionActive { autoScreensaver = false; ActivityMonitor.shared.poke() }
+            }
         }
     }
 }

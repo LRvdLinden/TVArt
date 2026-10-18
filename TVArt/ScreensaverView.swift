@@ -46,11 +46,10 @@ struct ScreensaverView: View {
 
     private func load() async {
         ActivityMonitor.shared.exhibitionActive = true
-        let pool: [Artwork]
-        if theme == .favorites {
-            pool = settings.favoriteArtworks
-        } else {
-            pool = await MuseumService.shared.screensaverArtworks(theme: theme)
+        var pool: [Artwork] = theme == .favorites ? settings.favoriteArtworks : []
+        if pool.isEmpty {
+            // No favorites yet → fall back to all masters so the screensaver always shows art.
+            pool = await MuseumService.shared.screensaverArtworks(theme: theme == .favorites ? .allMasters : theme)
         }
         guard !Task.isCancelled else { return }
         artworks = pool.shuffled()
