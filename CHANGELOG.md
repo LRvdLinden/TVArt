@@ -21,6 +21,9 @@
 - Instellingen in `@AppStorage` binnen een ObservableObject ververste de UI niet betrouwbaar; omgezet naar `@Published` + UserDefaults.
 - "Bedieningstips tonen" deed niets; nu gekoppeld aan de tips onder het museumbordje.
 - Overzichtsraster laadde volledige 1686px-afbeeldingen als thumbnail; nu lichte thumbnails (600px / Met small).
+- Grote museumscans (20+ MP) worden nu naar 4K verkleind bij het decoderen, zodat de Apple TV niet zonder geheugen komt.
+- Snel achter elkaar ◀/▶ drukken telt nu correct op en toont nooit een ouder werk; bordje en favoriet horen altijd bij het werk in beeld.
+- Werken zonder kunstenaarsnaam (anoniem) verschijnen niet meer onder een kunstenaar.
 - Met-API haalde 24 objecten één voor één op; nu in kleine parallelle batches (sneller laden).
 - Info.plist opgeschoond (iOS-oriëntaties verwijderd, `ITSAppUsesNonExemptEncryption`, lanceerkleur, fonts).
 - Development Team ingesteld op EU3UY476T6, gedeeld Xcode-scheme toegevoegd.

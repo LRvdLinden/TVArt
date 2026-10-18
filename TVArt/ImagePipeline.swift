@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import ImageIO
 
 /// Downloads, decodes and caches artwork images so the slideshow can cross-fade without flashes.
 actor ImagePipeline {
@@ -8,7 +9,7 @@ actor ImagePipeline {
     private let cache: NSCache<NSURL, UIImage> = {
         let c = NSCache<NSURL, UIImage>()
         c.countLimit = 60
-        c.totalCostLimit = 350_000_000
+        c.totalCostLimit = 150_000_000
         return c
     }()
     private var running: [URL: Task<UIImage?, Never>] = [:]
@@ -28,9 +29,15 @@ actor ImagePipeline {
         let session = self.session
         let task = Task<UIImage?, Never> {
             guard let (data, response) = try? await session.data(from: url),
-                  (response as? HTTPURLResponse)?.statusCode ?? 200 < 400,
-                  let image = UIImage(data: data) else { return nil }
-            return await image.byPreparingForDisplay() ?? image
+                  (response as? HTTPURLResponse)?.statusCode ?? 200 < 400 else { return nil }
+            // Downsample huge museum scans (often 20+ MP) to 4K so the Apple TV never runs out of memory.
+            let options = [kCGImageSourceCreateThumbnailFromImageAlways: true,
+                           kCGImageSourceShouldCacheImmediately: true,
+                           kCGImageSourceCreateThumbnailWithTransform: true,
+                           kCGImageSourceThumbnailMaxPixelSize: 3840] as CFDictionary
+            guard let source = CGImageSourceCreateWithData(data as CFData, nil),
+                  let cg = CGImageSourceCreateThumbnailAtIndex(source, 0, options) else { return nil }
+            return UIImage(cgImage: cg)
         }
         running[url] = task
         let image = await task.value

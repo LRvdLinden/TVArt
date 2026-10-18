@@ -150,6 +150,7 @@ actor MuseumService {
     private static func matches(_ artist: String, search: String) -> Bool {
         let a = artist.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
         let b = search.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+        guard !a.isEmpty, !b.isEmpty else { return false }
         return a.contains(b) || b.contains(a)
     }
 }

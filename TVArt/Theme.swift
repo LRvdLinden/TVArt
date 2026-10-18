@@ -45,7 +45,7 @@ struct Wordmark: View {
                         .offset(x: shimmer * g.size.width * 1.4 - g.size.width * 0.4)
                         .opacity(shimmer < 0 ? 0 : 1)
                 }
-                .mask(word)
+                .mask { word }
             }
             .shadow(color: .black.opacity(0.55), radius: size * 0.08, y: size * 0.03)
             .accessibilityLabel("TVArt")

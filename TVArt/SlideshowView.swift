@@ -28,6 +28,8 @@ struct SlideshowView: View {
     @State private var toast: String?
     @State private var toastToken = 0
     @State private var settingsOpen = false
+    @State private var target = 0          // position we are heading to (rapid presses add up)
+    @State private var loadGeneration = 0  // only the newest load may update the screen
 
     private var current: Artwork? { order.isEmpty ? nil : artworks[order[position]] }
 
@@ -169,30 +171,36 @@ struct SlideshowView: View {
             order = Array(artworks.indices[first...]) + Array(artworks.indices[..<first])
         }
         position = 0
-        await show(position: 0)
+        target = 0
+        await show(position: 0, in: order)
     }
 
     private func step(_ delta: Int) async {
         guard order.count > 0 else { return }
-        var next = position + delta
-        if next >= order.count {
+        var newOrder = order
+        var next = target + delta
+        if next >= newOrder.count {
             next = 0
-            if settings.random && order.count > 2 {
-                let last = order[position]
+            if settings.random && newOrder.count > 2 {
+                let last = newOrder[min(target, newOrder.count - 1)]
                 // New shuffle; the work we just saw goes last so it never repeats back-to-back.
-                order = artworks.indices.filter { $0 != last }.shuffled() + [last]
+                newOrder = artworks.indices.filter { $0 != last }.shuffled() + [last]
             }
         }
-        if next < 0 { next = order.count - 1 }
-        await show(position: next)
+        if next < 0 { next = newOrder.count - 1 }
+        target = next
+        await show(position: next, in: newOrder)
     }
 
-    private func show(position target: Int) async {
-        let art = artworks[order[target]]
+    private func show(position target: Int, in newOrder: [Int]) async {
+        loadGeneration += 1
+        let generation = loadGeneration
+        let art = artworks[newOrder[target]]
         if slide == nil { loadingFailed = false }
         let image = await ImagePipeline.shared.image(for: art.imageURL)
-        guard !Task.isCancelled else { return }
+        guard generation == loadGeneration, !Task.isCancelled else { return }
         withAnimation(.easeInOut(duration: 1.1)) {
+            order = newOrder
             position = target
             if let image {
                 slide = Slide(artwork: art, image: image)
@@ -204,7 +212,7 @@ struct SlideshowView: View {
         }
         if settings.captions { revealLabel(toggle: false) }
         // Preload the next two works for seamless cross-fades.
-        let upcoming = (1...2).map { order[(target + $0) % order.count] }.map { artworks[$0].imageURL }
+        let upcoming = (1...2).map { newOrder[(target + $0) % newOrder.count] }.map { artworks[$0].imageURL }
         await ImagePipeline.shared.prefetch(upcoming)
     }
 
