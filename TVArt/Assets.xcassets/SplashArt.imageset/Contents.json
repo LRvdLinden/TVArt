@@ -1,0 +1,18 @@
+{
+  "images": [
+    {
+      "filename": "splash_art.jpg",
+      "idiom": "tv",
+      "scale": "1x"
+    },
+    {
+      "filename": "splash_art@2x.jpg",
+      "idiom": "tv",
+      "scale": "2x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

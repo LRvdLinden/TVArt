@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F0FADFF3FBFEF59F1BD2FFA9 /* TVArtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E44EBB83BFD569CA5BF6FC /* TVArtApp.swift */; };
+		35A0019BCC3823CD268EF0A5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881453AC5C0212F4F3132131 /* Theme.swift */; };
+		2239D73AB32FB5FF31969C0B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B572F65DE29D384C89D6A5 /* SplashView.swift */; };
+		E0FADF967BE69B1E9F5982E1 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4EFE066E4E15DF67EF08EE /* Models.swift */; };
+		2E6DEFFD6C87CF1051DE3FAE /* MuseumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8534B402D0F024E4F888EC /* MuseumService.swift */; };
+		BB0EA124976256AA5BD6B6E1 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D944F3B6BBD9A94127DAAD1 /* ImagePipeline.swift */; };
+		826EF8E79D50C9109D0779D0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9582C45138D6C69D42F34 /* HomeView.swift */; };
+		34CDA6ABB828E5A3F4626E5A /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D25137B154A07BED402469 /* GalleryView.swift */; };
+		1A6493B31D0356868DD34C6B /* SlideshowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037FDF29C521984CC1382BED /* SlideshowView.swift */; };
+		C24299D89D285E985C089C0F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344231C687A1F4BDC84AE838 /* SettingsView.swift */; };
+		918300860A3D632F0686AE00 /* CormorantGaramond-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F419C7C87076A98111972 /* CormorantGaramond-SemiBold.ttf */; };
+		E2B22BA1BD7EEBA609B2F9CC /* CormorantGaramond-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A753DC3125B92E1CE374F /* CormorantGaramond-Medium.ttf */; };
+		73EC906678F06B0611143396 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58B2FC89C30513E5D34080C /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F2AAA8631D38FAF699B78BA9 /* TVArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5E44EBB83BFD569CA5BF6FC /* TVArtApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVArtApp.swift; sourceTree = "<group>"; };
+		881453AC5C0212F4F3132131 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		F2B572F65DE29D384C89D6A5 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		8B4EFE066E4E15DF67EF08EE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		2C8534B402D0F024E4F888EC /* MuseumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumService.swift; sourceTree = "<group>"; };
+		8D944F3B6BBD9A94127DAAD1 /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
+		93D9582C45138D6C69D42F34 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		69D25137B154A07BED402469 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		037FDF29C521984CC1382BED /* SlideshowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideshowView.swift; sourceTree = "<group>"; };
+		344231C687A1F4BDC84AE838 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7C7F419C7C87076A98111972 /* CormorantGaramond-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CormorantGaramond-SemiBold.ttf; sourceTree = "<group>"; };
+		2D9A753DC3125B92E1CE374F /* CormorantGaramond-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CormorantGaramond-Medium.ttf; sourceTree = "<group>"; };
+		B58B2FC89C30513E5D34080C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		102DE2A2AE766BE3209864BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9A1B0878F3B471C62CCC20A /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA6BB2E26A0CCFEF79A2DF42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B19911C44BD755AB4F173858 = {
+			isa = PBXGroup;
+			children = (
+				107135D82C0898ACC5295C33,
+				3936A56E033FE156B0D38F79,
+			);
+			sourceTree = "<group>";
+		};
+		107135D82C0898ACC5295C33 = {
+			isa = PBXGroup;
+			children = (
+				C5E44EBB83BFD569CA5BF6FC,
+				881453AC5C0212F4F3132131,
+				F2B572F65DE29D384C89D6A5,
+				8B4EFE066E4E15DF67EF08EE,
+				2C8534B402D0F024E4F888EC,
+				8D944F3B6BBD9A94127DAAD1,
+				93D9582C45138D6C69D42F34,
+				69D25137B154A07BED402469,
+				037FDF29C521984CC1382BED,
+				344231C687A1F4BDC84AE838,
+				735B00F8AD7F523C452E3D39,
+				B58B2FC89C30513E5D34080C,
+				102DE2A2AE766BE3209864BC,
+			);
+			path = TVArt;
+			sourceTree = "<group>";
+		};
+		735B00F8AD7F523C452E3D39 = {
+			isa = PBXGroup;
+			children = (
+				7C7F419C7C87076A98111972,
+				2D9A753DC3125B92E1CE374F,
+				E9A1B0878F3B471C62CCC20A,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3936A56E033FE156B0D38F79 = {
+			isa = PBXGroup;
+			children = (
+				F2AAA8631D38FAF699B78BA9,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42AEFBAE01D2DFD981F7DA7D /* TVArt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2080502859FB363E8EF65FF2;
+			buildPhases = (
+				F37F801ADEA753D69F245CAA /* Sources */,
+				FA6BB2E26A0CCFEF79A2DF42 /* Frameworks */,
+				33F142212957EABBFDC6831F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TVArt;
+			productName = TVArt;
+			productReference = F2AAA8631D38FAF699B78BA9 /* TVArt.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46F86FAA6BBF9AC94A7E4595 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					42AEFBAE01D2DFD981F7DA7D = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 2D6CADEF21B99EA5E890ABE8;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = nl;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				nl,
+				en,
+				Base,
+			);
+			mainGroup = B19911C44BD755AB4F173858;
+			productRefGroup = 3936A56E033FE156B0D38F79 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42AEFBAE01D2DFD981F7DA7D /* TVArt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		33F142212957EABBFDC6831F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73EC906678F06B0611143396 /* Assets.xcassets in Resources */,
+				918300860A3D632F0686AE00 /* CormorantGaramond-SemiBold.ttf in Resources */,
+				E2B22BA1BD7EEBA609B2F9CC /* CormorantGaramond-Medium.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F37F801ADEA753D69F245CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0FADFF3FBFEF59F1BD2FFA9 /* TVArtApp.swift in Sources */,
+				35A0019BCC3823CD268EF0A5 /* Theme.swift in Sources */,
+				2239D73AB32FB5FF31969C0B /* SplashView.swift in Sources */,
+				E0FADF967BE69B1E9F5982E1 /* Models.swift in Sources */,
+				2E6DEFFD6C87CF1051DE3FAE /* MuseumService.swift in Sources */,
+				BB0EA124976256AA5BD6B6E1 /* ImagePipeline.swift in Sources */,
+				826EF8E79D50C9109D0779D0 /* HomeView.swift in Sources */,
+				34CDA6ABB828E5A3F4626E5A /* GalleryView.swift in Sources */,
+				1A6493B31D0356868DD34C6B /* SlideshowView.swift in Sources */,
+				C24299D89D285E985C089C0F /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4ED3C4B22349DD5A28B27128 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		293A5B816A2FADE15A3C7B02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		981A7673EDCC40225DDFC7BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = EU3UY476T6;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TVArt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.lrvdlinden.tvart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		30F33F93A3C7974A1B5FCB33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = EU3UY476T6;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TVArt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.lrvdlinden.tvart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D6CADEF21B99EA5E890ABE8 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4ED3C4B22349DD5A28B27128 /* Debug */,
+				293A5B816A2FADE15A3C7B02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2080502859FB363E8EF65FF2 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				981A7673EDCC40225DDFC7BF /* Debug */,
+				30F33F93A3C7974A1B5FCB33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+}
