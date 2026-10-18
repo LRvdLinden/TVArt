@@ -31,6 +31,8 @@ import SwiftUI
     private var wantsToPlay = false
     private var endObserver: NSObjectProtocol?
     private var fadeTask: Task<Void, Never>?
+    private var playTask: Task<Void, Never>?
+    private var isActive = true
 
     private let folder: URL = {
         let dir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
@@ -61,17 +63,25 @@ import SwiftUI
             guard !wantsToPlay else { fade(to: volume, seconds: 1.0); return }
             wantsToPlay = true
             try? AVAudioSession.sharedInstance().setActive(true)
-            Task { await playCurrent() }
+            playTask?.cancel()
+            playTask = Task { await playCurrent() }
         } else {
             wantsToPlay = false
+            playTask?.cancel()
             fade(to: 0, seconds: 1.5) { [weak self] in self?.player.pause() }
         }
     }
 
     /// Pause/resume with the app (e.g. when the TV goes to the Home screen).
     func appBecameActive(_ active: Bool) {
+        isActive = active
         guard wantsToPlay else { return }
         if active {
+            if player.currentItem == nil {
+                playTask?.cancel()
+                playTask = Task { await playCurrent() }
+                return
+            }
             player.play()
             fade(to: targetVolume, seconds: 2)
         } else {
@@ -85,11 +95,12 @@ import SwiftUI
         guard let file = await localFile(for: track) else {
             // Offline or unavailable: try the next piece in a minute.
             try? await Task.sleep(for: .seconds(60))
+            guard !Task.isCancelled else { return }
             index = (index + 1) % Self.tracks.count
             await playCurrent()
             return
         }
-        guard wantsToPlay else { return }
+        guard wantsToPlay, isActive, !Task.isCancelled else { return }
         player.replaceCurrentItem(with: AVPlayerItem(url: file))
         nowPlaying = track
         player.volume = 0

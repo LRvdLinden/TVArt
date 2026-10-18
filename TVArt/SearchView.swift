@@ -53,7 +53,7 @@ struct SearchView: View {
         .searchable(text: $query, prompt: Text("Artist or painting"))
         .task(id: query) {
             let q = query
-            guard q.trimmingCharacters(in: .whitespaces).count >= 2 else { results = []; return }
+            guard q.trimmingCharacters(in: .whitespaces).count >= 2 else { results = []; searching = false; return }
             searching = true
             try? await Task.sleep(for: .milliseconds(350))   // wait until typing pauses
             guard !Task.isCancelled else { return }

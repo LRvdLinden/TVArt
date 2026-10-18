@@ -141,9 +141,16 @@ actor MuseumService {
         guard !words.isEmpty else { return [] }
         var hits: [Artwork] = []
         var seen = Set<String>()
-        for artist in Artist.collection {
+        // Load (or read from cache) all collections in parallel; Wikidata calls stay throttled.
+        let lists = await withTaskGroup(of: (Int, Artist, [Artwork]).self) { group -> [(Int, Artist, [Artwork])] in
+            for (i, artist) in Artist.collection.enumerated() { group.addTask { (i, artist, await self.load(artist)) } }
+            var all: [(Int, Artist, [Artwork])] = []
+            for await item in group { all.append(item) }
+            return all.sorted { $0.0 < $1.0 }
+        }
+        for (_, artist, works) in lists {
             if Task.isCancelled { return [] }
-            for art in await load(artist) where !seen.contains(art.id) {
+            for art in works where !seen.contains(art.id) {
                 let haystack = (art.title + " " + art.artist + " " + artist.name)
                     .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US"))
                 if words.allSatisfy({ haystack.contains($0) }) {
