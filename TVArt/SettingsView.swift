@@ -52,6 +52,14 @@ struct SettingsView: View {
                         SettingsToggleRow(title: "Floating clock", isOn: $settings.clock)
                         SettingsToggleRow(title: "Show remote tips", isOn: $settings.hints)
 
+                        SettingsHeader("Music")
+                        SettingsToggleRow(title: "Classical music in the background", isOn: $settings.music)
+                        SettingsRow(title: "Volume", value: settings.musicLevelLabel) { settings.cycleMusicLevel() }
+                        Text("Debussy – Clair de lune · Satie – Gymnopédie No. 1 (Michael Laucke) · Chopin – Nocturne Op. 9 No. 2 (Frank Lévy). Public-domain recordings via Wikimedia Commons, played one after another on a loop.")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal, 24)
+
                         SettingsHeader("Screensaver")
                         SettingsRow(title: "Start automatically", value: GallerySettings.delayLabel(settings.screensaverDelay)) {
                             settings.cycleScreensaverDelay()

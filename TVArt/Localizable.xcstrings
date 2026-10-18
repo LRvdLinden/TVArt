@@ -1,6 +1,16 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%@ – %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ – %@"
+          }
+        }
+      }
+    },
     "%@, %@": {
       "localizations": {
         "nl": {
@@ -251,6 +261,26 @@
         }
       }
     },
+    "Artist or painting": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunstenaar of schilderij"
+          }
+        }
+      }
+    },
+    "Artists": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunstenaars"
+          }
+        }
+      }
+    },
     "Artworks and titles come from Wikidata and Wikimedia Commons, supplemented by the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Only public-domain works are shown. These settings are also available in the Apple TV Settings app.": {
       "localizations": {
         "nl": {
@@ -301,6 +331,16 @@
         }
       }
     },
+    "Best known": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekendste"
+          }
+        }
+      }
+    },
     "COLLECTION": {
       "localizations": {
         "nl": {
@@ -331,12 +371,32 @@
         }
       }
     },
+    "Classical music in the background": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klassieke muziek op de achtergrond"
+          }
+        }
+      }
+    },
     "Collecting masterpieces from all masters. The first time takes a moment.": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Meesterwerken van alle meesters verzamelen. De eerste keer duurt dit even."
+          }
+        }
+      }
+    },
+    "Debussy – Clair de lune · Satie – Gymnopédie No. 1 (Michael Laucke) · Chopin – Nocturne Op. 9 No. 2 (Frank Lévy). Public-domain recordings via Wikimedia Commons, played one after another on a loop.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debussy – Clair de lune · Satie – Gymnopédie nr. 1 (Michael Laucke) · Chopin – Nocturne op. 9 nr. 2 (Frank Lévy). Opnames uit het publieke domein via Wikimedia Commons, na elkaar in een doorlopende loop."
           }
         }
       }
@@ -461,6 +521,16 @@
         }
       }
     },
+    "Music": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muziek"
+          }
+        }
+      }
+    },
     "My favorites": {
       "localizations": {
         "nl": {
@@ -511,6 +581,26 @@
         }
       }
     },
+    "No paintings found.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen schilderijen gevonden."
+          }
+        }
+      }
+    },
+    "Normal": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normaal"
+          }
+        }
+      }
+    },
     "Off": {
       "localizations": {
         "nl": {
@@ -527,6 +617,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aan"
+          }
+        }
+      }
+    },
+    "Paintings": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schilderijen"
           }
         }
       }
@@ -651,6 +751,26 @@
         }
       }
     },
+    "Search": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoeken"
+          }
+        }
+      }
+    },
+    "Search by artist or painting, for example “Van Gogh”, “Sterrennacht” or “Mona Lisa”.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoek op kunstenaar of schilderij, bijvoorbeeld “Van Gogh”, “Sterrennacht” of “Mona Lisa”."
+          }
+        }
+      }
+    },
     "Settings": {
       "localizations": {
         "nl": {
@@ -717,6 +837,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Langzame zoom (Ken Burns)"
+          }
+        }
+      }
+    },
+    "Soft": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zacht"
+          }
+        }
+      }
+    },
+    "Sort by": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sorteren op"
           }
         }
       }
@@ -811,6 +951,26 @@
         }
       }
     },
+    "Title A–Z": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naam A–Z"
+          }
+        }
+      }
+    },
+    "Title Z–A": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naam Z–A"
+          }
+        }
+      }
+    },
     "Try again": {
       "localizations": {
         "nl": {
@@ -841,12 +1001,52 @@
         }
       }
     },
+    "Very soft": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heel zacht"
+          }
+        }
+      }
+    },
+    "Volume": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume"
+          }
+        }
+      }
+    },
     "While TVArt shows art, the Apple TV screensaver stays off, so artworks can stay on screen for hours.": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Zolang TVArt kunst toont, blijft de screensaver van de Apple TV uit. Zo kunnen kunstwerken urenlang in beeld blijven."
+          }
+        }
+      }
+    },
+    "Year: newest first": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaartal: nieuw → oud"
+          }
+        }
+      }
+    },
+    "Year: oldest first": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaartal: oud → nieuw"
           }
         }
       }

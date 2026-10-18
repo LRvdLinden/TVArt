@@ -159,6 +159,20 @@ enum FitMode: Int, CaseIterable, Identifiable {
     /// Minutes of inactivity before the screensaver starts; 0 = off.
     @Published var screensaverDelay: Int { didSet { store.set(screensaverDelay, forKey: Keys.saverDelay) } }
     @Published var screensaverThemeRaw: Int { didSet { store.set(screensaverThemeRaw, forKey: Keys.saverTheme) } }
+    /// Soft classical music in the background.
+    @Published var music: Bool { didSet { store.set(music, forKey: Keys.music) } }
+    /// 0 = very soft, 1 = soft, 2 = normal.
+    @Published var musicLevel: Int { didSet { store.set(musicLevel, forKey: Keys.musicLevel) } }
+
+    var musicVolume: Float { [0.1, 0.2, 0.35][min(max(musicLevel, 0), 2)] }
+    var musicLevelLabel: String {
+        switch musicLevel {
+        case 0: return String(localized: "Very soft")
+        case 2: return String(localized: "Normal")
+        default: return String(localized: "Soft")
+        }
+    }
+    func cycleMusicLevel() { musicLevel = (musicLevel + 1) % 3 }
     @Published private(set) var favoriteArtworks: [Artwork] = []
 
     var fitMode: FitMode { FitMode(rawValue: fitModeRaw) ?? .automatic }
@@ -171,12 +185,14 @@ enum FitMode: Int, CaseIterable, Identifiable {
         static let duration = "duration", clock = "clock", random = "random", zoom = "zoom"
         static let hints = "hints", captions = "captions", fit = "fitMode", favorites = "favoriteArtworks.v2"
         static let saverDelay = "screensaverDelay", saverTheme = "screensaverTheme"
+        static let music = "music", musicLevel = "musicLevel"
     }
 
     init() {
         store.register(defaults: [Keys.duration: 30, Keys.clock: false, Keys.random: true, Keys.zoom: true,
                                   Keys.hints: true, Keys.captions: true, Keys.fit: 0,
-                                  Keys.saverDelay: 5, Keys.saverTheme: 0])
+                                  Keys.saverDelay: 5, Keys.saverTheme: 0,
+                                  Keys.music: true, Keys.musicLevel: 1])
         duration = store.integer(forKey: Keys.duration)
         clock = store.bool(forKey: Keys.clock)
         random = store.bool(forKey: Keys.random)
@@ -186,6 +202,8 @@ enum FitMode: Int, CaseIterable, Identifiable {
         fitModeRaw = store.integer(forKey: Keys.fit)
         screensaverDelay = store.integer(forKey: Keys.saverDelay)
         screensaverThemeRaw = store.integer(forKey: Keys.saverTheme)
+        music = store.bool(forKey: Keys.music)
+        musicLevel = store.integer(forKey: Keys.musicLevel)
         if let data = store.data(forKey: Keys.favorites),
            let saved = try? JSONDecoder().decode([Artwork].self, from: data) {
             // Drop favorites from the retired Chicago source (its images are no longer reachable).
@@ -204,6 +222,8 @@ enum FitMode: Int, CaseIterable, Identifiable {
         if random != store.bool(forKey: Keys.random) { random = store.bool(forKey: Keys.random) }
         if zoom != store.bool(forKey: Keys.zoom) { zoom = store.bool(forKey: Keys.zoom) }
         if screensaverDelay != store.integer(forKey: Keys.saverDelay) { screensaverDelay = store.integer(forKey: Keys.saverDelay) }
+        if music != store.bool(forKey: Keys.music) { music = store.bool(forKey: Keys.music) }
+        if musicLevel != store.integer(forKey: Keys.musicLevel) { musicLevel = store.integer(forKey: Keys.musicLevel) }
     }
 
     static func delayLabel(_ minutes: Int) -> String {

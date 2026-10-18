@@ -102,6 +102,44 @@
 				<integer>30</integer>
 			</array>
 		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Music</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>music</string>
+			<key>Title</key>
+			<string>Classical music</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>Key</key>
+			<string>musicLevel</string>
+			<key>Title</key>
+			<string>Volume</string>
+			<key>Titles</key>
+			<array>
+				<string>Very soft</string>
+				<string>Soft</string>
+				<string>Normal</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>

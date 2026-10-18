@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.0 (build 6) — 2026-10-18
+
+**Zoeken**
+- Nieuwe zoekknop op het startscherm: zoek op **kunstenaar** of **schilderijnaam** in alle collecties ("Van Gogh", "Sterrennacht", "Mona Lisa"). Treffers op de titel staan bovenaan, daarna op bekendheid.
+
+**Sorteren**
+- Bij elke schilder kun je sorteren: **Bekendste**, **Naam A–Z / Z–A** en **Jaartal oud → nieuw / nieuw → oud**. Werken zonder jaartal staan achteraan.
+
+**Klassieke muziek**
+- Zachte klassieke muziek op de achtergrond: drie stukken die na elkaar in een doorlopende loop spelen: Debussy *Clair de lune*, Satie *Gymnopédie nr. 1* (Michael Laucke) en Chopin *Nocturne op. 9 nr. 2* (Frank Lévy). Opnames uit het publieke domein via Wikimedia Commons.
+- Fade-in/-out, mixt met andere audio, pauzeert als je de app verlaat. Na de eerste keer staan de stukken op de Apple TV, dus ze spelen ook offline.
+- In Instellingen aan/uit te zetten, met volume Heel zacht / Zacht (standaard) / Normaal. Ook in de Apple TV-Instellingen-app.
+- Het museumbordje toont welk stuk er speelt.
+
 ## 1.0.0 (build 5) — 2026-10-18
 
 **Veel meer kunstwerken**

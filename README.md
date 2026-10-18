@@ -4,9 +4,9 @@
 
 Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple TV die meesterwerken uit openbare museumcollecties schermvullend als tentoonstelling toont.
 
-**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `5` · **tvOS** 17.0+
+**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `6` · **tvOS** 17.0+
 
-📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build5.zip`](releases/TVArt-v1.0.0-build5.zip)
+📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build6.zip`](releases/TVArt-v1.0.0-build6.zip)
 
 ![Splashscreen](docs/splash.jpg)
 
@@ -16,6 +16,8 @@ Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple 
 - Volledig Nederlands en Engels, volgt de taal van de Apple TV.
 - Honderden werken per meester via Wikidata/Wikimedia Commons (Van Gogh: 889), gesorteerd op bekendheid, met titels in je eigen taal.
 - **Screensavers** per thema (Alle meesters, Landschappen, Portretten, Stillevens & bloemen, Stad & architectuur, Zee & water, Dagelijks leven, Favorieten) die automatisch starten na een ingestelde tijd.
+- **Zoeken** op kunstenaar of schilderijnaam en **sorteren** per schilder (bekendste, naam A–Z/Z–A, jaartal oud↔nieuw).
+- **Klassieke muziek** zachtjes op de achtergrond: Debussy, Satie en Chopin in een doorlopende loop (publiek domein).
 - Tentoonstellingsmodus met vloeiende overgangen, langzame Ken Burns-zoom en een museumbordje per werk.
 - Tijd per werk: 20 / 30 seconden of 1 / 2 / 5 / 8 minuten; willekeurig of op volgorde.
 - Weergave Automatisch / Volledig werk / Beeldvullend, met vervaagde achtergrond bij staande werken.
@@ -62,6 +64,8 @@ TVArt/
   SettingsView.swift    Instellingen (tvOS Settings-stijl)
   MuseumService.swift   Wikidata/Commons + The Met + Cleveland, schijfcache
   ScreensaverView.swift Screensavers per thema
+  SearchView.swift      Zoeken op kunstenaar en schilderij
+  BackgroundMusic.swift Klassieke achtergrondmuziek (3 stukken, loop)
   ActivityMonitor.swift Detecteert inactiviteit voor automatische screensaver
   Settings.bundle       Instellingen in de Apple TV-Instellingen-app
   ImagePipeline.swift   Laden, cachen, vooraf ophalen van beelden
@@ -75,6 +79,7 @@ TVArt/
 - Wikidata Query Service + Wikimedia Commons (hoofdbron, afbeeldingen van publiek-domeinwerken): https://query.wikidata.org/
 - The Metropolitan Museum of Art Collection API (v1.1 search): https://metmuseum.github.io/
 - Cleveland Museum of Art Open Access API (CC0): https://openaccess-api.clevelandart.org/
+- Muziek: publiek-domeinopnames van Wikimedia Commons (Debussy – Clair de lune, Satie – Gymnopédie nr. 1 door Michael Laucke, Chopin – Nocturne op. 9 nr. 2 door Frank Lévy).
 - Collecties worden 7 dagen gecachet op het apparaat. Het Art Institute of Chicago is niet meer bruikbaar (beeldserver blokkeert apps).
 - Alleen werken die de bron als publiek domein markeert worden getoond. Controleer de gebruiksvoorwaarden van de musea vóór commerciële publicatie.
 

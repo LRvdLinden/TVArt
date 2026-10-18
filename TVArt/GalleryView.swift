@@ -10,11 +10,12 @@ struct ArtworkCollectionView: View {
     @State private var artworks: [Artwork] = []
     @State private var loading = true
     @State private var onlyFavorites = false
-    private let cols = [GridItem(.adaptive(minimum: 360), spacing: 44)]
+    @State private var sort: ArtworkSort = .famous
 
     private var visible: [Artwork] {
         guard artist != nil else { return settings.favoriteArtworks }
-        return onlyFavorites ? artworks.filter { settings.favorites.contains($0.id) } : artworks
+        let base = onlyFavorites ? artworks.filter { settings.favorites.contains($0.id) } : artworks
+        return sort.apply(base)
     }
 
     var body: some View {
@@ -33,6 +34,15 @@ struct ArtworkCollectionView: View {
                         }
                     }
                     if artist != nil {
+                        Menu {
+                            Picker("Sort by", selection: $sort) {
+                                ForEach(ArtworkSort.allCases) { option in
+                                    Label(option.label, systemImage: option.symbol).tag(option)
+                                }
+                            }
+                        } label: {
+                            Label(sort.label, systemImage: "arrow.up.arrow.down")
+                        }
                         Button { onlyFavorites.toggle() } label: {
                             Label(onlyFavorites ? LocalizedStringKey("All works") : LocalizedStringKey("Favorites only"),
                                   systemImage: onlyFavorites ? "square.grid.2x2" : "heart")
@@ -54,32 +64,7 @@ struct ArtworkCollectionView: View {
                 } else if visible.isEmpty {
                     emptyState
                 } else {
-                    LazyVGrid(columns: cols, alignment: .leading, spacing: 50) {
-                        ForEach(Array(visible.enumerated()), id: \.element.id) { index, artwork in
-                            VStack(alignment: .leading, spacing: 14) {
-                                NavigationLink {
-                                    SlideshowView(artworks: visible, startIndex: index)
-                                } label: {
-                                    ArtImage(url: artwork.thumbnailURL)
-                                        .frame(width: 360, height: 230)
-                                        .clipped()
-                                        .overlay(alignment: .topTrailing) {
-                                            if settings.favorites.contains(artwork.id) {
-                                                Image(systemName: "heart.fill")
-                                                    .foregroundStyle(Theme.goldSolid)
-                                                    .padding(12)
-                                                    .shadow(radius: 6)
-                                            }
-                                        }
-                                }
-                                .buttonStyle(.card)
-                                Text(artwork.title).font(.callout.weight(.semibold)).lineLimit(2)
-                                Text(artist == nil ? artwork.artist : artwork.date)
-                                    .font(.caption).foregroundStyle(.secondary).lineLimit(1)
-                            }
-                            .frame(width: 360)
-                        }
-                    }
+                    ArtworkGrid(artworks: visible, showArtist: artist == nil)
                 }
             }
             .padding(80)
@@ -111,5 +96,93 @@ struct ArtworkCollectionView: View {
         artworks = data
         loading = false
         await ImagePipeline.shared.prefetch(Array(data.prefix(12).map(\.thumbnailURL)))
+    }
+}
+
+/// How the works of one artist are ordered.
+enum ArtworkSort: String, CaseIterable, Identifiable {
+    case famous, titleAZ, titleZA, oldest, newest
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .famous: return String(localized: "Best known")
+        case .titleAZ: return String(localized: "Title A–Z")
+        case .titleZA: return String(localized: "Title Z–A")
+        case .oldest: return String(localized: "Year: oldest first")
+        case .newest: return String(localized: "Year: newest first")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .famous: return "star"
+        case .titleAZ: return "textformat"
+        case .titleZA: return "textformat"
+        case .oldest: return "calendar"
+        case .newest: return "calendar"
+        }
+    }
+
+    func apply(_ works: [Artwork]) -> [Artwork] {
+        switch self {
+        case .famous:
+            return works
+        case .titleAZ:
+            return works.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+        case .titleZA:
+            return works.sorted { $0.title.localizedStandardCompare($1.title) == .orderedDescending }
+        case .oldest, .newest:
+            // Works without a known year always go last.
+            let dated = works.filter { $0.year != nil }
+            let undated = works.filter { $0.year == nil }
+            let sorted = dated.sorted { self == .oldest ? $0.year! < $1.year! : $0.year! > $1.year! }
+            return sorted + undated
+        }
+    }
+}
+
+extension Artwork {
+    /// First four-digit number in the date ("c. 1889", "1888–89" → 1888).
+    var year: Int? {
+        guard let range = date.range(of: #"\d{4}"#, options: .regularExpression) else { return nil }
+        return Int(date[range])
+    }
+}
+
+/// Grid of artwork cards; selecting one starts an exhibition from that work.
+struct ArtworkGrid: View {
+    let artworks: [Artwork]
+    var showArtist: Bool = false
+    @EnvironmentObject var settings: GallerySettings
+    private let cols = [GridItem(.adaptive(minimum: 360), spacing: 44)]
+
+    var body: some View {
+        LazyVGrid(columns: cols, alignment: .leading, spacing: 50) {
+            ForEach(Array(artworks.enumerated()), id: \.element.id) { index, artwork in
+                VStack(alignment: .leading, spacing: 14) {
+                    NavigationLink {
+                        SlideshowView(artworks: artworks, startIndex: index)
+                    } label: {
+                        ArtImage(url: artwork.thumbnailURL)
+                            .frame(width: 360, height: 230)
+                            .clipped()
+                            .overlay(alignment: .topTrailing) {
+                                if settings.favorites.contains(artwork.id) {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundStyle(Theme.goldSolid)
+                                        .padding(12)
+                                        .shadow(radius: 6)
+                                }
+                            }
+                    }
+                    .buttonStyle(.card)
+                    Text(artwork.title).font(.callout.weight(.semibold)).lineLimit(2)
+                    Text(showArtist ? [artwork.artist, artwork.date].filter { !$0.isEmpty }.joined(separator: " · ") : artwork.date)
+                        .font(.caption).foregroundStyle(.secondary).lineLimit(1)
+                }
+                .frame(width: 360)
+            }
+        }
     }
 }

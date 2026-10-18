@@ -18,6 +18,7 @@ struct RootView: View {
     @EnvironmentObject var settings: GallerySettings
     @State private var showSplash = true
     @State private var autoScreensaver = false
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
@@ -36,6 +37,11 @@ struct RootView: View {
                 .zIndex(1)
             }
         }
+        // Soft classical music (3 pieces on a loop), following the settings.
+        .onAppear { BackgroundMusic.shared.update(enabled: settings.music, volume: settings.musicVolume) }
+        .onChange(of: settings.music) { _, on in BackgroundMusic.shared.update(enabled: on, volume: settings.musicVolume) }
+        .onChange(of: settings.musicLevel) { _, _ in BackgroundMusic.shared.update(enabled: settings.music, volume: settings.musicVolume) }
+        .onChange(of: scenePhase) { _, phase in BackgroundMusic.shared.appBecameActive(phase == .active) }
         // Warm up all collections in the background (disk-cached for a week).
         .task { await MuseumService.shared.prefetchCovers(for: Artist.collection) }
         // Start the chosen screensaver after the set time without remote input.

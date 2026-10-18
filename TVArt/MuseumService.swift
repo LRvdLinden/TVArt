@@ -133,6 +133,41 @@ actor MuseumService {
         return lists.flatMap { Self.filter($0, theme: theme).prefix(perArtist) }
     }
 
+    /// Finds paintings whose title or maker contains the query, across all collections
+    /// (most famous first). Collections that are not cached yet are loaded on the way.
+    func search(_ query: String, limit: Int = 300) async -> [Artwork] {
+        let words = query.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US"))
+            .split(separator: " ").map(String.init).filter { !$0.isEmpty }
+        guard !words.isEmpty else { return [] }
+        var hits: [Artwork] = []
+        var seen = Set<String>()
+        for artist in Artist.collection {
+            if Task.isCancelled { return [] }
+            for art in await load(artist) where !seen.contains(art.id) {
+                let haystack = (art.title + " " + art.artist + " " + artist.name)
+                    .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US"))
+                if words.allSatisfy({ haystack.contains($0) }) {
+                    seen.insert(art.id)
+                    hits.append(art)
+                }
+            }
+        }
+        // Title matches before matches on the artist name only; then by fame.
+        let titleWords = words
+        func titleHit(_ a: Artwork) -> Bool {
+            let t = a.title.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US"))
+            return titleWords.contains { t.contains($0) }
+        }
+        let sorted = hits.enumerated().sorted { lhs, rhs in
+            let l = titleHit(lhs.element), r = titleHit(rhs.element)
+            if l != r { return l }
+            let lp = lhs.element.popularity ?? 0, rp = rhs.element.popularity ?? 0
+            if lp != rp { return lp > rp }
+            return lhs.offset < rhs.offset
+        }.map(\.element)
+        return Array(sorted.prefix(limit))
+    }
+
     /// Cover for a screensaver theme, using only collections that are already loaded (no network).
     func themeCover(_ theme: ScreensaverTheme) -> URL? {
         for artist in Artist.collection {

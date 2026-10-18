@@ -15,6 +15,7 @@ struct SlideshowView: View {
     let startIndex: Int
 
     @EnvironmentObject var settings: GallerySettings
+    @ObservedObject private var music = BackgroundMusic.shared
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focused: Bool
 
@@ -151,6 +152,11 @@ struct SlideshowView: View {
                         .font(.title3)
                         .foregroundStyle(.white.opacity(0.85))
                     Text(art.source).font(.caption).foregroundStyle(.white.opacity(0.6))
+                    if settings.music, let track = music.nowPlaying {
+                        Label("\(track.composer) – \(track.title)", systemImage: "music.note")
+                            .font(.caption)
+                            .foregroundStyle(Theme.goldSolid.opacity(0.85))
+                    }
                     if settings.hints {
                         Text("◀ ▶ browse   ▲ favorite   ⏯ pause   hold click: settings")
                             .font(.caption2)

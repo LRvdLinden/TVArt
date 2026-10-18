@@ -78,8 +78,13 @@ struct ArtistHomeView: View {
                         .foregroundStyle(Theme.paper.opacity(0.9))
                 }
                 Spacer()
-                Button { showingSettings = true } label: {
-                    Label("Settings", systemImage: "gearshape")
+                HStack(spacing: 24) {
+                    NavigationLink { SearchView() } label: {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                    Button { showingSettings = true } label: {
+                        Label("Settings", systemImage: "gearshape")
+                    }
                 }
             }
             .padding(.horizontal, 80)

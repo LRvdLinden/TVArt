@@ -10,7 +10,7 @@ def oid(name):
 
 swift = ["TVArtApp.swift", "Theme.swift", "SplashView.swift", "Models.swift", "MuseumService.swift",
          "ImagePipeline.swift", "HomeView.swift", "GalleryView.swift", "SlideshowView.swift", "SettingsView.swift",
-         "ActivityMonitor.swift", "ScreensaverView.swift"]
+         "ActivityMonitor.swift", "ScreensaverView.swift", "SearchView.swift", "BackgroundMusic.swift"]
 fonts = ["CormorantGaramond-SemiBold.ttf", "CormorantGaramond-Medium.ttf"]
 for f in swift: assert os.path.exists(f"{ROOT}/TVArt/{f}"), f
 for f in fonts: assert os.path.exists(f"{ROOT}/TVArt/Fonts/{f}"), f
