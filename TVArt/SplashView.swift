@@ -54,7 +54,7 @@ struct SplashView: View {
                         .fill(Theme.gold)
                         .frame(width: lineWidth, height: 3)
 
-                    Text("Meesterwerken op je grootste scherm")
+                    Text("Masterpieces on your biggest screen")
                         .font(Theme.displayMedium(44))
                         .tracking(3)
                         .foregroundStyle(Theme.paper.opacity(0.9))
@@ -73,7 +73,7 @@ struct SplashView: View {
         }
         .ignoresSafeArea()
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("TVArt. Meesterwerken op je grootste scherm.")
+        .accessibilityLabel("TVArt. Masterpieces on your biggest screen.")
         .task { await play() }
     }
 

@@ -1,0 +1,726 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@, %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@"
+          }
+        }
+      }
+    },
+    "%lld / %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld"
+          }
+        }
+      }
+    },
+    "%lld artworks": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld artwork"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld artworks"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld kunstwerk"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld kunstwerken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld minutes": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld minute"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld minutes"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld minuut"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld minuten"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld seconds": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld second"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seconds"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seconde"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seconden"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld works": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld work"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld works"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld werk"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld werken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "About TVArt": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Over TVArt"
+          }
+        }
+      }
+    },
+    "All works": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle werken"
+          }
+        }
+      }
+    },
+    "Artworks are loaded live from the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Internet connection required.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunstwerken worden live geladen uit de open collecties van The Metropolitan Museum of Art en het Cleveland Museum of Art. Internetverbinding vereist."
+          }
+        }
+      }
+    },
+    "Artworks are loaded live from the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Only works marked public domain by the museum are shown.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunstwerken worden live geladen uit de open collecties van The Metropolitan Museum of Art en het Cleveland Museum of Art. Alleen werken die het museum als publiek domein markeert worden getoond."
+          }
+        }
+      }
+    },
+    "Automatic": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch"
+          }
+        }
+      }
+    },
+    "COLLECTION": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COLLECTIE"
+          }
+        }
+      }
+    },
+    "Choose an artist or collection": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kies een kunstenaar of collectie"
+          }
+        }
+      }
+    },
+    "Display": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weergave"
+          }
+        }
+      }
+    },
+    "Exhibition": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tentoonstelling"
+          }
+        }
+      }
+    },
+    "Favorite on/off": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoriet aan/uit"
+          }
+        }
+      }
+    },
+    "Favorites only": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen favorieten"
+          }
+        }
+      }
+    },
+    "Fetching paintings from the museums…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schilderijen ophalen bij de musea…"
+          }
+        }
+      }
+    },
+    "Fill screen": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beeldvullend"
+          }
+        }
+      }
+    },
+    "Floating clock": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwevende klok"
+          }
+        }
+      }
+    },
+    "Hold click": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik ingedrukt houden"
+          }
+        }
+      }
+    },
+    "Masterpieces on your biggest screen": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meesterwerken op je grootste scherm"
+          }
+        }
+      }
+    },
+    "Museum label on each artwork": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Museumbordje bij elk werk"
+          }
+        }
+      }
+    },
+    "My favorites": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mijn favorieten"
+          }
+        }
+      }
+    },
+    "No favorites for this artist yet.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen favorieten voor deze kunstenaar."
+          }
+        }
+      }
+    },
+    "No favorites yet. Press ▲ during an exhibition to save an artwork.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen favorieten. Druk tijdens een tentoonstelling op ▲ om een werk te bewaren."
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uit"
+          }
+        }
+      }
+    },
+    "On": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aan"
+          }
+        }
+      }
+    },
+    "Pause / resume": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pauze / hervat"
+          }
+        }
+      }
+    },
+    "Paused": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gepauzeerd"
+          }
+        }
+      }
+    },
+    "Piet Mondrian": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piet Mondriaan"
+          }
+        }
+      }
+    },
+    "Previous / next": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorige / volgende"
+          }
+        }
+      }
+    },
+    "Removed from favorites": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijderd uit favorieten"
+          }
+        }
+      }
+    },
+    "Renaissance": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renaissance"
+          }
+        }
+      }
+    },
+    "Saved on this Apple TV": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bewaard op deze Apple TV"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen"
+          }
+        }
+      }
+    },
+    "Show museum label": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Museumbordje tonen"
+          }
+        }
+      }
+    },
+    "Show remote tips": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bedieningstips tonen"
+          }
+        }
+      }
+    },
+    "Show whole artwork": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledig werk tonen"
+          }
+        }
+      }
+    },
+    "Shuffle": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Willekeurige volgorde"
+          }
+        }
+      }
+    },
+    "Siri Remote": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siri Remote"
+          }
+        }
+      }
+    },
+    "Slow zoom (Ken Burns)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langzame zoom (Ken Burns)"
+          }
+        }
+      }
+    },
+    "Start exhibition": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start tentoonstelling"
+          }
+        }
+      }
+    },
+    "TVArt": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TVArt"
+          }
+        }
+      }
+    },
+    "TVArt. Masterpieces on your biggest screen.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TVArt. Meesterwerken op je grootste scherm."
+          }
+        }
+      }
+    },
+    "The museum collections can't be reached right now, or no public-domain works were found.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De museumcollecties zijn nu niet bereikbaar, of er zijn geen rechtenvrije werken gevonden."
+          }
+        }
+      }
+    },
+    "This artwork couldn't be loaded. Press ▶ for the next one.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit kunstwerk kon niet worden geladen. Druk op ▶ voor het volgende."
+          }
+        }
+      }
+    },
+    "Time per artwork": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tijd per kunstwerk"
+          }
+        }
+      }
+    },
+    "Try again": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opnieuw proberen"
+          }
+        }
+      }
+    },
+    "Untitled": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zonder titel"
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versie %@"
+          }
+        }
+      }
+    },
+    "Your museum. On the biggest screen.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouw museum. Op het grootste scherm."
+          }
+        }
+      }
+    },
+    "⏯": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⏯"
+          }
+        }
+      }
+    },
+    "⏸  Paused": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⏸  Gepauzeerd"
+          }
+        }
+      }
+    },
+    "▲": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "▲"
+          }
+        }
+      }
+    },
+    "▶  Resumed": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "▶  Hervat"
+          }
+        }
+      }
+    },
+    "▼ / click": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "▼ / klik"
+          }
+        }
+      }
+    },
+    "◀ ▶": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "◀ ▶"
+          }
+        }
+      }
+    },
+    "◀ ▶ browse   ▲ favorite   ⏯ pause   hold click: settings": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "◀ ▶ bladeren   ▲ favoriet   ⏯ pauze   klik ingedrukt houden: instellingen"
+          }
+        }
+      }
+    },
+    "♥  Saved to favorites": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "♥  Bewaard in favorieten"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

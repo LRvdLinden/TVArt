@@ -29,17 +29,17 @@ struct ArtworkCollectionView: View {
                         NavigationLink {
                             SlideshowView(artworks: visible, startIndex: 0)
                         } label: {
-                            Label("Start tentoonstelling", systemImage: "play.fill")
+                            Label("Start exhibition", systemImage: "play.fill")
                         }
                     }
                     if artist != nil {
                         Button { onlyFavorites.toggle() } label: {
-                            Label(onlyFavorites ? "Alle werken" : "Alleen favorieten",
+                            Label(onlyFavorites ? LocalizedStringKey("All works") : LocalizedStringKey("Favorites only"),
                                   systemImage: onlyFavorites ? "square.grid.2x2" : "heart")
                         }
                     }
                     if !loading || artist == nil {
-                        Text("\(visible.count) \(visible.count == 1 ? "werk" : "werken")")
+                        Text("\(visible.count) works")
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -48,7 +48,7 @@ struct ArtworkCollectionView: View {
                 if loading && artist != nil {
                     VStack(spacing: 24) {
                         ProgressView()
-                        Text("Schilderijen ophalen bij de musea…").foregroundStyle(.secondary)
+                        Text("Fetching paintings from the museums…").foregroundStyle(.secondary)
                     }
                     .frame(maxWidth: .infinity, minHeight: 360)
                 } else if visible.isEmpty {
@@ -91,12 +91,12 @@ struct ArtworkCollectionView: View {
     private var emptyState: some View {
         VStack(spacing: 22) {
             Image(systemName: "photo.artframe").font(.system(size: 80, weight: .ultraLight)).foregroundStyle(Theme.goldSolid)
-            Text(artist == nil ? "Nog geen favorieten. Druk tijdens een tentoonstelling op ▲ om een werk te bewaren."
-                 : onlyFavorites ? "Nog geen favorieten voor deze kunstenaar."
-                 : "De museumcollecties zijn nu niet bereikbaar, of er zijn geen rechtenvrije werken gevonden.")
+            Text(artist == nil ? LocalizedStringKey("No favorites yet. Press ▲ during an exhibition to save an artwork.")
+                 : onlyFavorites ? LocalizedStringKey("No favorites for this artist yet.")
+                 : LocalizedStringKey("The museum collections can't be reached right now, or no public-domain works were found."))
                 .multilineTextAlignment(.center)
             if artist != nil && !onlyFavorites {
-                Button("Opnieuw proberen") { Task { await refresh() } }
+                Button("Try again") { Task { await refresh() } }
             }
         }
         .font(.title3)

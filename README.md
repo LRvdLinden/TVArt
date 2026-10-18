@@ -4,19 +4,20 @@
 
 Jouw museum, op het grootste scherm. TVArt is een native SwiftUI-app voor Apple TV die meesterwerken uit openbare museumcollecties schermvullend als tentoonstelling toont.
 
-**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `2` · **tvOS** 17.0+
+**Bundle ID** `nl.lrvdlinden.tvart` · **Versie** `1.0.0` · **Build** `3` · **tvOS** 17.0+
 
-📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build2.zip`](releases/TVArt-v1.0.0-build2.zip)
+📦 **Download Xcode-project:** [`releases/TVArt-v1.0.0-build3.zip`](releases/TVArt-v1.0.0-build3.zip)
 
 ![Splashscreen](docs/splash.jpg)
 
 ## Functies
 
-- Kies een kunstenaar of collectie: Van Gogh, Rembrandt, Monet, Mondriaan, Gauguin, Manet, Munch, Goya, Vermeer, Cézanne, Renoir, Degas, Turner, Hokusai, Botticelli, Dalí, Klimt en de Renaissance.
+- Kies een kunstenaar of collectie: Van Gogh, Rembrandt, Monet, Vermeer, Frans Hals, Mondriaan, Gauguin, Manet, Munch, Goya, Cézanne, Renoir, Degas, Turner, Hokusai, Botticelli, Klimt en de Renaissance.
+- Volledig Nederlands en Engels, volgt de taal van de Apple TV.
 - Tentoonstellingsmodus met vloeiende overgangen, langzame Ken Burns-zoom en een museumbordje per werk.
 - Tijd per werk: 20 / 30 seconden of 1 / 2 / 5 / 8 minuten; willekeurig of op volgorde.
 - Weergave Automatisch / Volledig werk / Beeldvullend, met vervaagde achtergrond bij staande werken.
-- Favorieten als eigen collectie, zwevende klok, instellingen die vanzelf sluiten (tegen inbranden).
+- Favorieten als eigen collectie, zwevende klok, instellingen in Apple TV-stijl die vanzelf sluiten (tegen inbranden).
 - Geen account of API-sleutels: alles live uit openbare musea-API's.
 
 ### Bediening (Siri Remote)
@@ -56,17 +57,19 @@ TVArt/
   HomeView.swift        Startscherm, kunstenaarskaarten, favorieten
   GalleryView.swift     Raster met werken per kunstenaar
   SlideshowView.swift   Tentoonstellingsmodus
-  SettingsView.swift    Instellingen
-  MuseumService.swift   Art Institute of Chicago + The Met
+  SettingsView.swift    Instellingen (tvOS Settings-stijl)
+  MuseumService.swift   The Met + Cleveland Museum of Art, schijfcache
   ImagePipeline.swift   Laden, cachen, vooraf ophalen van beelden
   Assets.xcassets       App Icon & Top Shelf brand assets, SplashArt
+  Localizable.xcstrings Nederlands + Engels
   Fonts/                Cormorant Garamond
 ```
 
 ## Bronnen & rechten
 
-- Art Institute of Chicago API: https://api.artic.edu/docs/
-- The Metropolitan Museum of Art Collection API: https://metmuseum.github.io/
+- The Metropolitan Museum of Art Collection API (v1.1 search): https://metmuseum.github.io/
+- Cleveland Museum of Art Open Access API (CC0): https://openaccess-api.clevelandart.org/
+- Collecties worden 7 dagen gecachet op het apparaat. Het Art Institute of Chicago is niet meer bruikbaar (beeldserver blokkeert apps).
 - Alleen werken die de bron als publiek domein markeert worden getoond. Controleer de gebruiksvoorwaarden van de musea vóór commerciële publicatie.
 
 Zie [CHANGELOG.md](CHANGELOG.md) voor alle wijzigingen.

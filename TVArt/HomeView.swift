@@ -12,22 +12,22 @@ struct ArtistHomeView: View {
                     hero
                     VStack(alignment: .leading, spacing: 36) {
                         if !settings.favoriteArtworks.isEmpty {
-                            sectionTitle("Mijn favorieten")
+                            sectionTitle("My favorites")
                             NavigationLink {
-                                ArtworkCollectionView(title: "Mijn favorieten", subtitle: "Bewaard op deze Apple TV", artist: nil)
+                                ArtworkCollectionView(title: String(localized: "My favorites"), subtitle: String(localized: "Saved on this Apple TV"), artist: nil)
                             } label: {
                                 FavoritesBanner(artworks: settings.favoriteArtworks)
                             }
                             .buttonStyle(.card)
                         }
-                        sectionTitle("Kies een kunstenaar of collectie")
+                        sectionTitle("Choose an artist or collection")
                         LazyVGrid(columns: columns, spacing: 56) {
                             ForEach(Artist.collection) { artist in
                                 NavigationLink(value: artist) { ArtistCard(artist: artist) }
                                     .buttonStyle(.card)
                             }
                         }
-                        Text("Kunstwerken worden live geladen uit de openbare collecties van het Art Institute of Chicago en The Metropolitan Museum of Art. Internetverbinding vereist.")
+                        Text("Artworks are loaded live from the open-access collections of The Metropolitan Museum of Art and the Cleveland Museum of Art. Internet connection required.")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                             .padding(.top, 20)
@@ -40,7 +40,7 @@ struct ArtistHomeView: View {
             .navigationDestination(for: Artist.self) { artist in
                 ArtworkCollectionView(title: artist.name, subtitle: artist.years, artist: artist)
             }
-            .sheet(isPresented: $showingSettings) { SettingsView() }
+            .fullScreenCover(isPresented: $showingSettings) { SettingsView() }
         }
         .tint(Theme.goldSolid)
     }
@@ -58,13 +58,13 @@ struct ArtistHomeView: View {
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading, spacing: 10) {
                     Wordmark(size: 120)
-                    Text("Jouw museum. Op het grootste scherm.")
+                    Text("Your museum. On the biggest screen.")
                         .font(Theme.displayMedium(38))
                         .foregroundStyle(Theme.paper.opacity(0.9))
                 }
                 Spacer()
                 Button { showingSettings = true } label: {
-                    Label("Instellingen", systemImage: "gearshape")
+                    Label("Settings", systemImage: "gearshape")
                 }
             }
             .padding(.horizontal, 80)
@@ -73,7 +73,7 @@ struct ArtistHomeView: View {
         .ignoresSafeArea(edges: .top)
     }
 
-    private func sectionTitle(_ text: String) -> some View {
+    private func sectionTitle(_ text: LocalizedStringKey) -> some View {
         Text(text).font(Theme.display(46)).foregroundStyle(Theme.paper)
     }
 }
@@ -104,7 +104,7 @@ struct ArtistCard: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 if artist.isCollection {
-                    Text("COLLECTIE").font(.caption2.weight(.semibold)).tracking(2).foregroundStyle(Theme.goldSolid)
+                    Text("COLLECTION").font(.caption2.weight(.semibold)).tracking(2).foregroundStyle(Theme.goldSolid)
                 }
                 Text(artist.name).font(Theme.display(36)).foregroundStyle(.white).lineLimit(1).minimumScaleFactor(0.7)
                 Text(artist.years).font(.caption).foregroundStyle(.white.opacity(0.75))
@@ -135,8 +135,8 @@ struct FavoritesBanner: View {
             HStack(spacing: 20) {
                 Image(systemName: "heart.fill").font(.system(size: 44)).foregroundStyle(Theme.goldSolid)
                 VStack(alignment: .leading) {
-                    Text("Mijn favorieten").font(Theme.display(48))
-                    Text("\(artworks.count) \(artworks.count == 1 ? "kunstwerk" : "kunstwerken")").foregroundStyle(.secondary)
+                    Text("My favorites").font(Theme.display(48))
+                    Text("\(artworks.count) artworks").foregroundStyle(.secondary)
                 }
             }
             .padding(36)

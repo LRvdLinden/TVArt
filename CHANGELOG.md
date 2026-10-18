@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0 (build 3) — 2026-10-18
+
+**Opgelost**
+- Er laadden geen kunstwerken. Oorzaak: de beeldserver van het Art Institute of Chicago blokkeert apps nu met een Cloudflare-botcheck (HTTP 403), en The Met heeft zijn oude zoek-API (`/v1/search`) op 1 oktober 2026 uitgezet. TVArt gebruikt nu de nieuwe Met-zoek-API (`/v1.1/search`) plus het **Cleveland Museum of Art** (Open Access, CC0).
+- Rustig tempo richting The Met (max. 3 gelijktijdige verzoeken); bij een 403/429 stopt de app die sessie met The Met en gaat hij verder met Cleveland.
+- Collecties worden 7 dagen op het apparaat bewaard: sneller openen en minder verzoeken.
+- Schilderijen staan bovenaan, daarna tekeningen en prenten.
+- Salvador Dalí verwijderd (niet publiek domein, er kwam nooit iets) en vervangen door Frans Hals.
+
+**Nieuw**
+- Instellingen in Apple TV-stijl, zoals de Instellingen-app: het kunstwerk links en een lijst rechts. Eén klik zet een optie aan/uit of kiest de volgende waarde, met Menu ga je terug. Opent schermvullend.
+- De app is volledig Nederlands en Engels en volgt de taal van het apparaat; bij andere talen wordt Engels gebruikt (String Catalog met meervoudsvormen).
+
 ## 1.0.0 (build 2) — 2026-10-18
 
 **Nieuw**

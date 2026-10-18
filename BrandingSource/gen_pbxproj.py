@@ -24,10 +24,11 @@ for f in fonts:
     files[f] = (oid("ref" + f), f"{{isa = PBXFileReference; lastKnownFileType = file; path = {f}; sourceTree = \"<group>\"; }}")
 files["Assets.xcassets"] = (oid("refassets"), "{isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = \"<group>\"; }")
 files["Info.plist"] = (oid("refinfo"), "{isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = \"<group>\"; }")
+files["Localizable.xcstrings"] = (oid("refstrings"), "{isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = \"<group>\"; }")
 files["OFL.txt"] = (oid("refofl"), "{isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = \"<group>\"; }")
 APP = oid("refapp")
 
-build = {f: oid("build" + f) for f in swift + fonts + ["Assets.xcassets"]}
+build = {f: oid("build" + f) for f in swift + fonts + ["Assets.xcassets", "Localizable.xcstrings"]}
 
 G_MAIN, G_APP, G_FONTS, G_PROD = oid("gmain"), oid("gapp"), oid("gfonts"), oid("gprod")
 P_SRC, P_RES, P_FW = oid("psrc"), oid("pres"), oid("pfw")
@@ -53,7 +54,7 @@ def group(gid, name, children, path=None):
     n = f"\t\t\tname = {name};\n" if name and not path else ""
     add(f"\t\t{gid} = {{\n\t\t\tisa = PBXGroup;\n\t\t\tchildren = (\n{ch}\t\t\t);\n{n}{p}\t\t\tsourceTree = \"<group>\";\n\t\t}};")
 group(G_MAIN, None, [G_APP, G_PROD])
-group(G_APP, "TVArt", [files[f][0] for f in swift] + [G_FONTS, files["Assets.xcassets"][0], files["Info.plist"][0]], path="TVArt")
+group(G_APP, "TVArt", [files[f][0] for f in swift] + [G_FONTS, files["Assets.xcassets"][0], files["Localizable.xcstrings"][0], files["Info.plist"][0]], path="TVArt")
 group(G_FONTS, "Fonts", [files[f][0] for f in fonts] + [files["OFL.txt"][0]], path="Fonts")
 group(G_PROD, "Products", [APP])
 add("/* End PBXGroup section */\n\n/* Begin PBXNativeTarget section */")
@@ -89,11 +90,11 @@ add(f"""\t\t{PROJECT} /* Project object */ = {{
 \t\t\t}};
 \t\t\tbuildConfigurationList = {CL_PROJ};
 \t\t\tcompatibilityVersion = "Xcode 14.0";
-\t\t\tdevelopmentRegion = nl;
+\t\t\tdevelopmentRegion = en;
 \t\t\thasScannedForEncodings = 0;
 \t\t\tknownRegions = (
-\t\t\t\tnl,
 \t\t\t\ten,
+\t\t\t\tnl,
 \t\t\t\tBase,
 \t\t\t);
 \t\t\tmainGroup = {G_MAIN};
@@ -105,7 +106,7 @@ add(f"""\t\t{PROJECT} /* Project object */ = {{
 \t\t\t);
 \t\t}};""")
 add("/* End PBXProject section */\n\n/* Begin PBXResourcesBuildPhase section */")
-res = "".join(f"\t\t\t\t{build[f]} /* {f} in Resources */,\n" for f in ["Assets.xcassets"] + fonts)
+res = "".join(f"\t\t\t\t{build[f]} /* {f} in Resources */,\n" for f in ["Assets.xcassets", "Localizable.xcstrings"] + fonts)
 add(f"\t\t{P_RES} /* Resources */ = {{\n\t\t\tisa = PBXResourcesBuildPhase;\n\t\t\tbuildActionMask = 2147483647;\n\t\t\tfiles = (\n{res}\t\t\t);\n\t\t\trunOnlyForDeploymentPostprocessing = 0;\n\t\t}};")
 add("/* End PBXResourcesBuildPhase section */\n\n/* Begin PBXSourcesBuildPhase section */")
 src = "".join(f"\t\t\t\t{build[f]} /* {f} in Sources */,\n" for f in swift)
@@ -129,7 +130,7 @@ target = {
     "ENABLE_PREVIEWS": "YES", "GENERATE_INFOPLIST_FILE": "NO", "INFOPLIST_FILE": "TVArt/Info.plist",
     "LD_RUNPATH_SEARCH_PATHS": "(\n\t\t\t\t\t\"$(inherited)\",\n\t\t\t\t\t\"@executable_path/Frameworks\",\n\t\t\t\t)",
     "MARKETING_VERSION": "1.0.0", "PRODUCT_BUNDLE_IDENTIFIER": "nl.lrvdlinden.tvart",
-    "PRODUCT_NAME": "\"$(TARGET_NAME)\"", "SWIFT_EMIT_LOC_STRINGS": "YES", "SWIFT_VERSION": "5.0",
+    "PRODUCT_NAME": "\"$(TARGET_NAME)\"", "SWIFT_EMIT_LOC_STRINGS": "YES", "LOCALIZATION_PREFERS_STRING_CATALOGS": "YES", "SWIFT_VERSION": "5.0",
     "TARGETED_DEVICE_FAMILY": "3", "TVOS_DEPLOYMENT_TARGET": "17.0",
 }
 def cfg(cid, name, settings):

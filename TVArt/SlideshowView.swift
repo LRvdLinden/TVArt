@@ -45,7 +45,7 @@ struct SlideshowView: View {
             } else if loadingFailed {
                 VStack(spacing: 18) {
                     Image(systemName: "wifi.exclamationmark").font(.system(size: 70))
-                    Text("Dit kunstwerk kon niet worden geladen. Druk op ▶ voor het volgende.")
+                    Text("This artwork couldn't be loaded. Press ▶ for the next one.")
                 }
                 .foregroundStyle(.secondary)
             } else {
@@ -94,7 +94,7 @@ struct SlideshowView: View {
         .onExitCommand {
             if showLabel { withAnimation(.easeInOut(duration: 0.4)) { showLabel = false } } else { dismiss() }
         }
-        .sheet(isPresented: $settingsOpen, onDismiss: { focused = true }) { SettingsView() }
+        .fullScreenCover(isPresented: $settingsOpen, onDismiss: { focused = true }) { SettingsView() }
         .task { await start() }
         // Auto-advance timer; restarts whenever the slide, pause state or duration changes.
         .task(id: "\(position)-\(slide?.id.uuidString ?? "")-\(paused)-\(settings.duration)-\(settingsOpen)") {
@@ -138,7 +138,7 @@ struct SlideshowView: View {
                         .foregroundStyle(.white.opacity(0.85))
                     Text(art.source).font(.caption).foregroundStyle(.white.opacity(0.6))
                     if settings.hints {
-                        Text("◀ ▶ bladeren   ▲ favoriet   ⏯ pauze   houd klik ingedrukt: instellingen")
+                        Text("◀ ▶ browse   ▲ favorite   ⏯ pause   hold click: settings")
                             .font(.caption2)
                             .foregroundStyle(.white.opacity(0.55))
                             .padding(.top, 10)
@@ -146,7 +146,7 @@ struct SlideshowView: View {
                 }
                 Spacer(minLength: 40)
                 VStack(alignment: .trailing, spacing: 8) {
-                    if paused { Label("Gepauzeerd", systemImage: "pause.fill").font(.headline) }
+                    if paused { Label("Paused", systemImage: "pause.fill").font(.headline) }
                     Text("\(position + 1) / \(order.count)")
                         .font(.headline.monospacedDigit())
                         .foregroundStyle(.white.opacity(0.75))
@@ -223,13 +223,13 @@ struct SlideshowView: View {
 
     private func togglePause() {
         paused.toggle()
-        flash(paused ? "⏸  Gepauzeerd" : "▶  Hervat")
+        flash(paused ? String(localized: "⏸  Paused") : String(localized: "▶  Resumed"))
     }
 
     private func toggleFavorite() {
         guard let art = current else { return }
         let isFav = settings.toggleFavorite(art)
-        flash(isFav ? "♥  Bewaard in favorieten" : "Verwijderd uit favorieten")
+        flash(isFav ? String(localized: "♥  Saved to favorites") : String(localized: "Removed from favorites"))
     }
 
     private func flash(_ text: String) {
